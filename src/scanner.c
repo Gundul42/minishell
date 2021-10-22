@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   scanner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 14:32:52 by graja             #+#    #+#             */
-/*   Updated: 2021/10/19 15:15:44 by graja            ###   ########.fr       */
+/*   Created: 2021/10/22 13:22:03 by graja             #+#    #+#             */
+/*   Updated: 2021/10/22 16:34:24 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header/minishell.h"
+#include "../header/minishell.h"
 
-int	main(int argc, char **argv)
+/* all trailing and ending whitespaces are cut of */
+char	**scan_input(char *str)
 {
-	char	*line;
+	char	*clean;
+	char	**ret;
 
-	line = readline(">> ");
-	while (line)
-	{
-		printf("[%s]\n", line);
-		if (ft_strlen(line) > 0)
-			add_history(line);
-		free(line);
-		line = readline(">> ");
-	}
-	printf("\n%d) Len = %ld\n", argc, ft_strlen(argv[0]));
-	return (0);
+	if (!str)
+		return (NULL);
+	clean = ft_strtrim(str, " \t\r\n\v\f");
+	if (!clean)
+		return (NULL);
+	ret = ft_split(clean, ' ');
+	free(clean);
+	return (ret);
 }
