@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/22 14:32:42 by graja             #+#    #+#             */
-/*   Updated: 2021/10/22 15:34:40 by graja            ###   ########.fr       */
+/*   Created: 2021/05/24 13:15:54 by graja             #+#    #+#             */
+/*   Updated: 2021/05/24 15:03:12 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/minishell.h"
+#include "libft.h"
+#include <stdlib.h>
 
-void	parse(char **str)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	pid_t	pid;
-	int		status;
+	t_list	*ptr;
 
-	if (!str)
+	if (!lst || !del)
 		return ;
-	if (!ft_strncmp(str[0], "ls\0", 3))
+	while (*lst)
 	{
-		printf("CMD: %s\n", str[0]);
-		pid = fork();
-		if (!pid)
-		{
-			execve(str[0], str, NULL);
-			_exit(EXIT_FAILURE);
-		}
-		else
-			waitpid(pid, &status, 0);
+		ptr = *lst;
+		*lst = ptr->next;
+		del(ptr->content);
+		free(ptr);
 	}
 }
