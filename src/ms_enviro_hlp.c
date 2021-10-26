@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:58:10 by graja             #+#    #+#             */
-/*   Updated: 2021/10/26 14:26:03 by graja            ###   ########.fr       */
+/*   Updated: 2021/10/26 18:37:20 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static
 int	ms_getlen(char *str)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (*str && *str != '=')
@@ -50,4 +50,3 @@ char	**ms_split(char	*str)
 		new[1] = ft_memcpy(new[1], str + ft_strlen(new[0]) + 1, len);
 	return (new);
 }
-

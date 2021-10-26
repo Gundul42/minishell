@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:52:00 by graja             #+#    #+#             */
-/*   Updated: 2021/10/26 18:14:05 by graja            ###   ########.fr       */
+/*   Updated: 2021/10/26 18:36:01 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	ms_builtin_cd(t_list **head, t_split *data)
 		return (err);
 	err = ms_putenv(head, "OLDPWD", ms_getenv(*head, "PWD"));
 	if (!err)
-	       err = ms_putenv(head, "PWD", getcwd(NULL, 0));
+		err = ms_putenv(head, "PWD", getcwd(NULL, 0));
 	return (err);
 }
