@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/10/26 12:21:48 by graja            ###   ########.fr       */
+/*   Updated: 2021/10/26 14:22:43 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int		ms_add2list(t_list **ehead, char *str);
 int		ms_init_env(t_list **ehead, char **env);
 int		ms_insnewlst(t_list **head, char *name, char *val);
 int		ms_putenv(t_list **head, char *name, char *val);
+int		ms_builtin_cd(t_list **head, t_split *data);
+int		ms_builtin_env(t_list **head);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
+char	**ms_split(char	*str);
 
 #endif

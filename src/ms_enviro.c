@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:16:28 by graja             #+#    #+#             */
-/*   Updated: 2021/10/26 12:17:55 by graja            ###   ########.fr       */
+/*   Updated: 2021/10/26 13:56:55 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ms_add2list(t_list **ehead, char *str)
 	content = malloc(sizeof(t_env));
 	if (!ehead || !str || !content)
 		return (1);
-	rst = ft_split(str, '=');
+	rst = ms_split(str);
 	if (!rst)
 		return (1);
 	content->name = rst[0];
