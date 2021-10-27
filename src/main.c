@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/10/26 17:30:54 by graja            ###   ########.fr       */
+/*   Updated: 2021/10/27 11:46:17 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	ms_init_shell(t_list **head)
 	char	*input;
 	char	*prompt;
 	t_split	data;
+	int		err;
 
-	while (1)
+	err = 0;
+	while (err >= 0)
 	{
 		data.i = 0;
 		prompt = ms_getprompt(*head);
@@ -33,12 +35,7 @@ void	ms_init_shell(t_list **head)
 			add_history(input);
 		ms_input_parser(input, &data);
 		free(input);
-		if (!strncmp(data.tokens[0], "exit", 4))
-			return ;
-		if (!strncmp(data.tokens[0], "cd", 2))
-			ms_builtin_cd(head, &data);
-		if (!strncmp(data.tokens[0], "env", 3))
-			ms_builtin_env(head);
+		err = ms_execute(head, &data);
 	}
 }
 
@@ -53,5 +50,4 @@ int main(int argc, char **argv, char **env)
 	ms_init_env(ehead, env);
 	ms_init_shell(ehead);
 	return (0);
-
 }

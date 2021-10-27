@@ -6,7 +6,7 @@
 #    By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 13:23:33 by graja             #+#    #+#              #
-#    Updated: 2021/10/26 14:23:13 by graja            ###   ########.fr        #
+#    Updated: 2021/10/27 11:54:43 by graja            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= minishell
 LIBFT		= Libft
 SRC		= src/ms_enviro.c src/main.c src/utils.c src/ms_input_parser.c \
 		 src/ms_prompt.c src/ms_builtin_cd.c src/ms_builtin_env.c \
-		 src/ms_enviro_hlp.c
+		 src/ms_enviro_hlp.c src/ms_execute.c src/ms_builtin_pwd.c
 CC		= gcc
 FLAGS		= -Wall -Wextra -Werror -pthread 
 RM		= rm -f
