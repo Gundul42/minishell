@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:52:00 by graja             #+#    #+#             */
-/*   Updated: 2021/10/27 10:38:06 by graja            ###   ########.fr       */
+/*   Updated: 2021/10/28 17:03:43 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static
 char	*ms_checktilde(t_list **head, char *str)
 {
-	if (!ft_strlen(str) || *str != '~')
+	if (!ft_strlen(str) || *str != '~' || !ms_getenv(*head, "HOME"))
 		return (str);
 	str++;
 	return (ft_strjoin(ms_getenv(*head, "HOME"), str));
