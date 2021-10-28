@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:57:47 by graja             #+#    #+#             */
-/*   Updated: 2021/10/27 16:45:56 by graja            ###   ########.fr       */
+/*   Updated: 2021/10/28 18:39:48 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ms_hasequal(char *str)
 	return (0);
 }
 
-void	ms_builtin_export(t_list **head,t_split *data)
+void	ms_builtin_export(t_list **head, t_split *data)
 {
 	char	**new;
 	int		i;

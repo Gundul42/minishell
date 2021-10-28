@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/10/28 12:13:55 by graja            ###   ########.fr       */
+/*   Updated: 2021/10/28 18:40:37 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@ int	ms_execute(t_list **head, t_split *data )
 	len = ft_strlen(data->tokens[0]);
 	if (!len)
 		return (0);
-	if (!strncmp(data->tokens[0], "exit", len))
+	else if (len > 3 && !strncmp(data->tokens[0], "exit", len))
 		return (-1);
-	if (!strncmp(data->tokens[0], "cd", len))
+	else if (len > 1 && !strncmp(data->tokens[0], "cd", len))
 		ms_builtin_cd(head, data);
-	if (!strncmp(data->tokens[0], "env", len))
+	else if (len > 2 && !strncmp(data->tokens[0], "env", len))
 		ms_builtin_env(head);
-	if (!strncmp(data->tokens[0], "pwd", len))
+	else if (len > 2 && !strncmp(data->tokens[0], "pwd", len))
 		ms_builtin_pwd(head);
-	if (!strncmp(data->tokens[0], "echo", len))
+	else if (len > 3 && !strncmp(data->tokens[0], "echo", len))
 		ms_builtin_echo(data);
-	if (!strncmp(data->tokens[0], "export", len))
+	else if (len > 5 && !strncmp(data->tokens[0], "export", len))
 		ms_builtin_export(head, data);
-	if (!strncmp(data->tokens[0], "unset", len))
+	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))
 		ms_builtin_unset(head, data);
+	else
+		printf("Command not found\n");
 	return (0);
 }
