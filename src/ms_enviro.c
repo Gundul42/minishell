@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:16:28 by graja             #+#    #+#             */
-/*   Updated: 2021/10/26 13:56:55 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/02 15:04:19 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	ms_add2list(t_list **ehead, char *str)
 		return (1);
 	content->name = rst[0];
 	content->value = rst[1];
+	free(rst);
 	ft_lstadd_back(ehead, ft_lstnew(content));
 	return (0);
 }

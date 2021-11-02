@@ -6,13 +6,32 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/02 12:50:40 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/02 15:41:34 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 extern char **environ;
+
+static
+void	ms_free_env(t_list **head)
+{
+	t_list	**current;
+	t_list	*next;
+	int		i;
+
+	i = 0;
+	current = head;
+	while (*current)
+	{
+		next = (*current)->next;
+		ft_lstdelone(*current, &ms_delentry);
+		*current = next;
+		i++;
+	}
+	free(head);
+}
 
 // Greeting shell during startup
 void	ms_init_shell(t_list **head)
@@ -53,5 +72,6 @@ int main(int argc, char **argv)
 	*ehead = NULL;
 	ms_init_env(ehead, env);
 	ms_init_shell(ehead);
+	ms_free_env(ehead);
 	return (0);
 }

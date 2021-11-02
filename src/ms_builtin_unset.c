@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:25:06 by graja             #+#    #+#             */
-/*   Updated: 2021/10/28 18:38:56 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/02 15:33:25 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@ int	ms_namecmp(t_list *lst, char *str)
 	if (!ft_strncmp(str, ptr->name, ft_strlen(ptr->name)))
 		return (1);
 	return (0);
-}
-
-static
-void	ms_delentry(void *lst)
-{
-	t_env	*cnt;
-
-	cnt = (t_env *)(lst);
-	if (cnt->name)
-		free(cnt->name);
-	if (cnt->value)
-		free(cnt->value);
-	free(cnt);
-	printf("**DELETED**\n");
 }
 
 static
@@ -60,6 +46,20 @@ void	ms_unsetvar(t_list **head, char *str)
 		current = &(*current)->next;
 	}
 }
+
+void	ms_delentry(void *lst)
+{
+	t_env	*cnt;
+
+	cnt = (t_env *)(lst);
+	if (cnt->name)
+		free(cnt->name);
+	if (cnt->value)
+		free(cnt->value);
+	free(cnt);
+/*	printf("**DELETED**\n");*/
+}
+
 
 void	ms_builtin_unset(t_list **head, t_split *data)
 {

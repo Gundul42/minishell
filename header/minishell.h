@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/02 10:40:59 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/02 14:36:07 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ms_builtin_pwd(t_list **head);
 void	ms_builtin_echo(t_split *data);
 void	ms_builtin_export(t_list **head, t_split *data);
 void	ms_builtin_unset(t_list **head, t_split *data);
+void	ms_delentry(void *lst);
 int		ms_add2list(t_list **ehead, char *str);
 int		ms_init_env(t_list **ehead, char **env);
 int		ms_insnewlst(t_list **head, char *name, char *val);
