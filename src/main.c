@@ -6,11 +6,13 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/10/27 11:46:17 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/02 12:50:40 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+extern char **environ;
 
 // Greeting shell during startup
 void	ms_init_shell(t_list **head)
@@ -39,10 +41,12 @@ void	ms_init_shell(t_list **head)
 	}
 }
 
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv)
 {
 	t_list	**ehead;
-	
+	char	**env;
+
+	env = environ;	
 	ehead = malloc(sizeof(t_list));
 	if (!ehead || !argc || !argv)
 		return (1);

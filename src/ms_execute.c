@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/10/28 18:40:37 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/02 13:38:31 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 int	ms_execute(t_list **head, t_split *data )
 {
 	int	len;
+	char	*name;
 
+	name = NULL;
 	len = ft_strlen(data->tokens[0]);
 	if (!len)
 		return (0);
@@ -33,7 +35,13 @@ int	ms_execute(t_list **head, t_split *data )
 		ms_builtin_export(head, data);
 	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))
 		ms_builtin_unset(head, data);
-	else
-		printf("Command not found\n");
+	else	
+		name = ms_file_exists(data->tokens[0], ms_getenv(*head, "PATH"));
+	if (name)
+	{
+		printf("%s\n", name);
+		printf("%d\n", execve(name, &name, NULL));
+		free(name);
+	}
 	return (0);
 }
