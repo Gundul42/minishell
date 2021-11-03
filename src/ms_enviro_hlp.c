@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:58:10 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 14:45:18 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/03 18:22:07 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,32 @@ int	ms_getlen(char *str)
 		str++;
 	}
 	return (i);
+}
+
+char	**ms_exportenv(t_list **head)
+{
+	t_env	*content;
+	t_list	*lst;
+	char	**arr;
+	char	*help;
+	int		i;
+
+	i = 0;
+	arr = ft_calloc(ms_getenvnbr(head) + 1, sizeof(char *));
+	if (!arr)
+		return (NULL);
+	lst = *head;
+	while (lst)
+	{
+		content = (t_env *)(lst->content);
+		help = ft_strjoin(content->name, "=");
+		arr[i] = ft_strjoin(help, content->value);
+		lst = lst->next;
+		i++;
+		free(help);
+	}
+	arr[i] = NULL;
+	return (arr);
 }
 
 /* returns the number of entries in the env list */
@@ -51,7 +77,7 @@ char	**ms_split(char	*str)
 	if (!str || !*str)
 		return (NULL);
 	len = ms_getlen(str);
-	new = ft_calloc(2, sizeof(char));
+	new = ft_calloc(2, sizeof(char *));
 	if (!new)
 		return (NULL);
 	new[0] = calloc(len + 1, sizeof(char));

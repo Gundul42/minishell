@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 11:55:52 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 13:56:51 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/03 16:20:24 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_env	**ms_sortenv(t_list **head)
 	int		i;
 
 	i = 0;
-	ret = calloc(ms_getenvnbr(head) + 1, sizeof(t_env));
+	ret = calloc(ms_getenvnbr(head) + 1, sizeof(t_env *));
 	if (!ret)
 		return (NULL);
 	lst = *head;

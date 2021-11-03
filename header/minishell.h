@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 14:29:29 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/03 18:47:50 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);
 char	*ms_file_exists(char *name, char *path);
+char	**ms_exportenv(t_list **head);
+char	**get_argv(t_split *data, char *name);
 t_env	**ms_sortenv(t_list **head);
 
 #endif

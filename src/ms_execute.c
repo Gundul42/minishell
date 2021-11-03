@@ -6,11 +6,35 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/02 13:38:31 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/03 18:50:55 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+char	**get_argv(t_split *data, char *name)
+{
+	int	i;
+	int	max;
+	char	**argv;
+
+	max = 0;
+	while (ft_strlen(data->tokens[max]))
+		max++;
+	max++;
+	argv = ft_calloc(max + 1, sizeof(char *));
+	if (!argv)
+		return (NULL);
+	argv[0] = ft_strdup(name);
+	i = 1;
+	while (ft_strlen(data->tokens[i]))
+	{
+		argv[i] = ft_strdup(data->tokens[i]);
+		i++;
+	}
+	argv[i] = NULL;
+	return (argv);
+}
 
 int	ms_execute(t_list **head, t_split *data )
 {
@@ -40,7 +64,7 @@ int	ms_execute(t_list **head, t_split *data )
 	if (name)
 	{
 		printf("%s\n", name);
-		printf("%d\n", execve(name, &name, NULL));
+		printf("%d\n", execve(name, get_argv(data, name), ms_exportenv(head)));
 		free(name);
 	}
 	return (0);
