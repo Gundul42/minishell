@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:57:47 by graja             #+#    #+#             */
-/*   Updated: 2021/10/28 18:39:48 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/03 14:44:07 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,27 @@ int	ms_hasequal(char *str)
 		str++;
 	}
 	return (0);
+}
+
+static
+void	ms_printexp(t_list **head)
+{
+	t_env	**ptr;
+	int		i;
+
+	i = 0;
+	ptr = ms_sortenv(head);
+	while (ptr && ptr[i])
+	{
+		printf("declare -x ");
+		printf("%s=\"", ptr[i]->name);
+		if (ms_getenv(*head, ptr[i]->name))
+			printf("%s\"\n", ms_getenv(*head, ptr[i]->name));
+		else
+			printf("\"\n");
+		i++;
+	}
+	free(ptr);
 }
 
 void	ms_builtin_export(t_list **head, t_split *data)
@@ -50,4 +71,6 @@ void	ms_builtin_export(t_list **head, t_split *data)
 		}
 		i++;
 	}
+	if (i == 1)
+		ms_printexp(head);
 }

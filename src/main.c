@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/02 15:41:34 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/03 12:22:11 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int main(int argc, char **argv)
 		return (1);
 	*ehead = NULL;
 	ms_init_env(ehead, env);
+	ms_sortenv(ehead);
 	ms_init_shell(ehead);
 	ms_free_env(ehead);
 	return (0);

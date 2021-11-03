@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:58:10 by graja             #+#    #+#             */
-/*   Updated: 2021/10/26 18:37:20 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/03 14:45:18 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,23 @@ int	ms_getlen(char *str)
 	return (i);
 }
 
+/* returns the number of entries in the env list */
+int	ms_getenvnbr(t_list **head)
+{
+	int		i;
+	t_list	*ptr;
+
+	ptr = *head;
+	i = 0;
+	while (ptr)
+	{
+		i++;
+		ptr = ptr->next;
+	}
+	return (i);
+}
+
+/*splits the string after first equal sign in two parts*/
 char	**ms_split(char	*str)
 {
 	char	**new;
