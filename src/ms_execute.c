@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 18:50:55 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/04 09:39:46 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,35 @@ char	**get_argv(t_split *data, char *name)
 	return (argv);
 }
 
+static
+void	ms_run_prog(t_list **head, t_split *data)
+{
+	char	*name;
+	int		status;
+	pid_t	pid;
+
+	name = ms_file_exists(data->tokens[0], ms_getenv(*head, "PATH"));
+	if (name)
+	{
+		pid = fork();
+		if (!pid)
+		{
+			printf("%d\n", execve(name, get_argv(data, name), ms_exportenv(head)));
+		}
+		else
+		{
+			waitpid(pid, &status, 0);
+			free(name);
+		}
+	}
+	else
+		printf("%s: command not found\n", data->tokens[0]);
+}
+
 int	ms_execute(t_list **head, t_split *data )
 {
 	int	len;
-	char	*name;
 
-	name = NULL;
 	len = ft_strlen(data->tokens[0]);
 	if (!len)
 		return (0);
@@ -59,13 +82,7 @@ int	ms_execute(t_list **head, t_split *data )
 		ms_builtin_export(head, data);
 	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))
 		ms_builtin_unset(head, data);
-	else	
-		name = ms_file_exists(data->tokens[0], ms_getenv(*head, "PATH"));
-	if (name)
-	{
-		printf("%s\n", name);
-		printf("%d\n", execve(name, get_argv(data, name), ms_exportenv(head)));
-		free(name);
-	}
+	else
+		ms_run_prog(head, data);
 	return (0);
 }
