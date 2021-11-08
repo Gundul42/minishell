@@ -6,13 +6,11 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/03 18:19:33 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/08 17:26:36 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-extern char **environ;
 
 static
 void	ms_free_env(t_list **head)
@@ -38,13 +36,11 @@ void	ms_init_shell(t_list **head)
 {
 	char	*input;
 	char	*prompt;
-	t_split	data;
 	int		err;
 
 	err = 0;
 	while (err >= 0)
 	{
-		data.i = 0;
 		prompt = ms_getprompt(*head);
 		if (!(input = readline(prompt)))
 		{
@@ -54,18 +50,16 @@ void	ms_init_shell(t_list **head)
 		free(prompt);
 		if (ft_strlen(input))
 			add_history(input);
-		ms_input_parser(input, &data);
-		free(input);
-		err = ms_execute(head, &data);
+		input = scan_input(input);
+		if (input)
+			free(input);
 	}
 }
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
 	t_list	**ehead;
-	char	**env;
 
-	env = environ;	
 	ehead = malloc(sizeof(t_list *));
 	if (!ehead || !argc || !argv)
 		return (1);

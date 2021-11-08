@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 18:47:50 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/08 18:54:35 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_env
 	char	*value;
 }		t_env;
 
+void	check_and_insert_spaces(char **line);
 void	ms_input_parser(char *input, t_split *data);
 void	ms_builtin_pwd(t_list **head);
 void	ms_builtin_echo(t_split *data);
@@ -58,6 +59,7 @@ int		ms_getenvnbr(t_list **head);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);
+char	*scan_input(char *input);
 char	*ms_file_exists(char *name, char *path);
 char	**ms_exportenv(t_list **head);
 char	**get_argv(t_split *data, char *name);
