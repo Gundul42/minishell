@@ -6,35 +6,54 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:22:03 by graja             #+#    #+#             */
-/*   Updated: 2021/11/08 18:54:32 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/09 15:23:34 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 static
-char	cut_comments(char *input)
+int	checkstack(char *stack, int run, char c)
 {
-	char	*bkp;
-	int	quote;
-
-	quote = 0;
-
+	if (!stack[run])
+	{
+		stack[run] = c;
+		return (run);
+	}
+	else if (stack[run] == c)
+	{
+		stack[run] = '\0';
+		return (run -1);
+	}
+	else
+	{
+		stack[run + 1] = c;
+		return (run + 1);
+	}
+}
 
 /* check for missing quotes */
 static
-int	checkquote( char *input, char c)
+int	checkquote(char *str)
 {
-	char	*bck;
-	int	err;
+	char	*stack;
+	int	run;
 
-	bck = input;
-	while (*bck)
+	run = 0;
+	stack = calloc(ft_strlen(str) + 1, sizeof(char));
+	if (!stack)
+		return (1);
+	while (*str)
 	{
-		if (!c && *bck == '"')
-			err = checkquote(bck, '"');
-
-	return (0);
+		if (*str =='\'' || *str == '"')
+			run = checkstack(stack, run, *str);
+		str++;
+		if (run < 0)
+			run = 0;
+	}
+	run = ft_strlen(stack);
+	free(stack);
+	return (run);
 }
 
 /* all trailing and ending whitespaces are cut of */
@@ -66,7 +85,6 @@ char	*scan_input(char *input)
 		printf("Syntax Error: unclosed quote\n");
 		return (NULL);
 	}
-	input = cut_comments(input);
 	printf("Trimmed: >>>%s\n", input);
 	return (input);
 }
