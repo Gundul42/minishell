@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:16:35 by graja             #+#    #+#             */
-/*   Updated: 2021/11/02 16:20:42 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 13:25:26 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ char	*ms_getprompt(t_list *head)
 	ft_strlcat(prompt, name, ft_strlen(name) + 1);
 	ft_strlcat(prompt, ":\033[1;34m", ft_strlen(prompt) + 9);
 	ft_strlcat(prompt, dir, ft_strlen(prompt) + ft_strlen(dir) + 1);
-	ft_strlcat(prompt, "\x1b[0m$ ", ft_strlen(prompt) + 8); 
+	ft_strlcat(prompt, "\x1b[0m$ ", ft_strlen(prompt) + 8);
 	return (prompt);
 }

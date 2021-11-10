@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:25:06 by graja             #+#    #+#             */
-/*   Updated: 2021/11/02 15:33:25 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 12:57:49 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ void	ms_delentry(void *lst)
 	if (cnt->value)
 		free(cnt->value);
 	free(cnt);
-/*	printf("**DELETED**\n");*/
 }
-
 
 void	ms_builtin_unset(t_list **head, t_split *data)
 {

@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/08 17:26:36 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 13:38:00 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void	ms_init_shell(t_list **head)
 	while (err >= 0)
 	{
 		prompt = ms_getprompt(*head);
-		if (!(input = readline(prompt)))
+		input = readline(prompt);
+		if (!input)
 		{
 			free(prompt);
 			return ;
@@ -56,7 +57,7 @@ void	ms_init_shell(t_list **head)
 	}
 }
 
-int main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	t_list	**ehead;
 

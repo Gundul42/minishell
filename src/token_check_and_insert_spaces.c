@@ -6,37 +6,36 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:39:54 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/08 11:14:12 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 13:26:14 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static char	*create_new_line(char *line, char *current,
+static
+char	*create_new_line(char *line, char *current,
 		int operator_size, int offset)
 {
-	char	*left;
-	char	*operator;
-	char	*right;
+	char	**help;
 	char	*new_line;
-	char	*joined1;
-	char	*joined2;
-	char	*joined3;
 
-	left = ft_substr(line, 0, offset);
-	operator = ft_substr(current, 0, operator_size);
-	right = ft_strdup(current + operator_size);
-	joined1 = ft_strjoin(left, " ");
-	joined2 = ft_strjoin(joined1, operator);
-	joined3 = ft_strjoin(joined2, " ");
-	new_line = ft_strjoin(joined3, right);
-	free(left);
-	free(operator);
-	free(right);
-	free(joined1);
-	free(joined2);
-	free(joined3);
-	
+	help = ft_calloc(6, sizeof(char *));
+	if (!help)
+		return (NULL);
+	help[0] = ft_substr(line, 0, offset);
+	help[1] = ft_substr(current, 0, operator_size);
+	help[2] = ft_strdup(current + operator_size);
+	help[3] = ft_strjoin(help[0], " ");
+	help[4] = ft_strjoin(help[3], help[1]);
+	help[5] = ft_strjoin(help[4], " ");
+	new_line = ft_strjoin(help[5], help[2]);
+	free(help[0]);
+	free(help[1]);
+	free(help[2]);
+	free(help[3]);
+	free(help[4]);
+	free(help[5]);
+	free(help);
 	return (new_line);
 }
 
@@ -53,7 +52,6 @@ static char	*insert_spaces(char **line, char *current, char *line_initial)
 		operator_size = 2;
 	else
 		operator_size = 1;
-	//e.g. lol>fsa -> offset = 3, because > is in position 3
 	offset = current - *line;
 	new_line = create_new_line(*line, current, operator_size, offset);
 	free(*line);
@@ -82,8 +80,7 @@ void	check_and_insert_spaces(char **line)
 	line_initial = *line;
 	while (current && *current)
 	{
-		// if there're quotes i just move after them
-		if ((*current == '\'' && ft_strchr(current + 1, '\'')) 
+		if ((*current == '\'' && ft_strchr(current + 1, '\''))
 			|| ((*current == '"' && ft_strchr(current + 1, '"'))))
 		{
 			quote_found = *current;

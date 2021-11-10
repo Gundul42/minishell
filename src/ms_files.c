@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 10:15:39 by graja             #+#    #+#             */
-/*   Updated: 2021/11/02 13:33:19 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 12:43:13 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,12 @@ char	*check_name(char *name)
 	return (back);
 }
 
-char	*ms_file_exists(char *name, char *path)
+char	*ms_file_exists(char *name, char *path, int i)
 {
 	char	**srch;
 	char	*fnd;
-	int		i;
 	int		fflag;
 
-	i = 0;
 	fflag = 0;
 	if (!path || !name)
 		return (NULL);

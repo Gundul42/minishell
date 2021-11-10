@@ -6,13 +6,13 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 11:55:52 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 16:20:24 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 12:56:12 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static 
+static
 int	ms_compare(char *one, char *two)
 {
 	int	i;

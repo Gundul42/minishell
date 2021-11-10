@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:22:03 by graja             #+#    #+#             */
-/*   Updated: 2021/11/09 15:23:34 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 12:37:54 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ static
 int	checkquote(char *str)
 {
 	char	*stack;
-	int	run;
+	int		run;
 
 	run = 0;
-	stack = calloc(ft_strlen(str) + 1, sizeof(char));
+	stack = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	if (!stack)
 		return (1);
 	while (*str)
 	{
-		if (*str =='\'' || *str == '"')
+		if (*str == '\'' || *str == '"')
 			run = checkstack(stack, run, *str);
 		str++;
 		if (run < 0)
@@ -86,5 +86,6 @@ char	*scan_input(char *input)
 		return (NULL);
 	}
 	printf("Trimmed: >>>%s\n", input);
+	ms_cut_tokens(input);
 	return (input);
 }

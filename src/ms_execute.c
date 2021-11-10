@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/04 09:39:46 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 12:53:00 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**get_argv(t_split *data, char *name)
 {
-	int	i;
-	int	max;
+	int		i;
+	int		max;
 	char	**argv;
 
 	max = 0;
@@ -43,13 +43,14 @@ void	ms_run_prog(t_list **head, t_split *data)
 	int		status;
 	pid_t	pid;
 
-	name = ms_file_exists(data->tokens[0], ms_getenv(*head, "PATH"));
+	name = ms_file_exists(data->tokens[0], ms_getenv(*head, "PATH"), 0);
 	if (name)
 	{
 		pid = fork();
 		if (!pid)
 		{
-			printf("%d\n", execve(name, get_argv(data, name), ms_exportenv(head)));
+			printf("%d\n", execve(name, get_argv(data, name), \
+						ms_exportenv(head)));
 		}
 		else
 		{
