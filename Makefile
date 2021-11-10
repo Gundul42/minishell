@@ -6,7 +6,7 @@
 #    By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 13:23:33 by graja             #+#    #+#              #
-#    Updated: 2021/11/09 17:44:21 by graja            ###   ########.fr        #
+#    Updated: 2021/11/10 13:48:55 by graja            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC		= src/ms_enviro.c src/main.c src/ms_input_parser.c \
 		 src/ms_builtin_echo.c src/ms_builtin_export.c \
 		 src/ms_builtin_unset.c src/ms_files.c src/ms_sortenv.c \
 		 src/token_check_and_insert_spaces.c src/scanner.c \
-		 src/ms_cutter.c
+		 src/ms_cutter.c src/ms_expansion.c
 CC		= gcc
 FLAGS		= -Wall -Wextra -Werror -pthread
 RM		= rm -f

@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:22:03 by graja             #+#    #+#             */
-/*   Updated: 2021/11/10 12:37:54 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 15:12:10 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,13 @@ char	*cleanup(char *input)
 	return (help);
 }
 
-char	*scan_input(char *input)
+void	scan_input(char *input, t_list **head)
 {
 	int	err;
 
 	err = 0;
 	if (!input)
-		return (NULL);
+		return ;
 	check_and_insert_spaces(&input);
 	input = cleanup(input);
 	err = checkquote(input);
@@ -83,9 +83,9 @@ char	*scan_input(char *input)
 	{
 		free(input);
 		printf("Syntax Error: unclosed quote\n");
-		return (NULL);
+		return ;
 	}
 	printf("Trimmed: >>>%s\n", input);
-	ms_cut_tokens(input);
-	return (input);
+	ms_cut_tokens(input, head);
+	free(input);
 }

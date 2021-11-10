@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:23:48 by graja             #+#    #+#             */
-/*   Updated: 2021/11/10 12:30:16 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/10 15:12:40 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,14 @@ void	fillmatrix(char **matrix, char *bgn, char *end, int i)
 	matrix[i] = cuttoken(bgn, end);
 }
 
-char	**ms_cut_tokens(char *str)
+char	**ms_cut_tokens(char *str, t_list **head)
 {
 	char	**matrix;
 	int		i;
 
 	matrix = ft_calloc(ft_strlen(str) + 1, sizeof(char *));
 	fillmatrix(matrix, str, str, 0);
+	expand_envvars(matrix, head);
 	i = 0;
 	while (matrix[i])
 	{
