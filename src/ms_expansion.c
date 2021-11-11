@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:48:10 by graja             #+#    #+#             */
-/*   Updated: 2021/11/10 18:53:56 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/11 16:56:55 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	exp_findentry(char *str)
 	int	n;
 
 	n = 0;
-	while (*str && *str!= '$')
+	while (*str && chk_single(str))
 	{
 		str++;
 		n++;
@@ -32,8 +32,7 @@ int	exp_findexit(char *str)
 	int	n;
 
 	n = 0;
-	while (*str && *str != '"' && *str != '\'' && *str != ' '
-			&& *str != '$')
+	while (*str && ft_isalnum(*str))
 	{
 		str++;
 		n++;
@@ -72,6 +71,11 @@ void	exp_var(char **matrix, int i, t_list **head)
 	entry = exp_findentry(matrix[i]);
 	exit = exp_findexit(matrix[i] + entry + 1);
 	var = ft_substr(matrix[i], entry + 1, exit);
+	if (!ft_strlen(var))
+	{
+		free(var);
+		return ;
+	}
 	new = exp_make(matrix[i], ms_getenv(*head, var), entry, exit);
 	free(var);
 	free(matrix[i]);
@@ -81,14 +85,27 @@ void	exp_var(char **matrix, int i, t_list **head)
 void	expand_envvars(char **matrix, t_list **head)
 {
 	int		i;
+	int		n;
+	char	*run;
 
 	i = 0;
 	while (matrix[i])
 	{
-		if (*matrix[i] != '\'')
+		if (expand_or_not(matrix, i))
 		{
-			while (ft_strchr(matrix[i], '$'))
-			exp_var(matrix, i, head);
+			n = 0;
+			run = matrix[i];
+			while (run && *run)
+			{
+				if (*run == '$')
+					n++;
+				run++;
+			}
+			while (n)
+			{
+				exp_var(matrix, i, head);
+				n--;
+			}
 		}
 		i++;
 	}

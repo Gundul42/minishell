@@ -6,37 +6,19 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:23:48 by graja             #+#    #+#             */
-/*   Updated: 2021/11/10 15:12:40 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/11 10:42:04 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 static
-char	*runtilfree(char *str, char c, char *stack, int i)
+char	*runtilfree(char *str, char c)
 {
-	stack = ft_calloc(ft_strlen(str) + 1, sizeof(char));
-	if (!stack)
-		return (str);
-	stack[i] = c;
-	str++;
-	while (*str && ft_strlen(stack))
-	{
-		if (*str != stack[i] && (*str == '"' || *str == '\''))
-		{
-			i++;
-			stack[i] = *str;
-		}
-		else if (*str == stack[i])
-		{
-			stack[i] = '\0';
-			i--;
-		}
-		if (i < 0)
-			i = 0;
+	while (*str && *str != c)
 		str++;
-	}
-	free(stack);
+	if (*str)
+		str++;
 	return (str);
 }
 
@@ -76,7 +58,7 @@ void	fillmatrix(char **matrix, char *bgn, char *end, int i)
 		}
 		else if (*end == '"' || *end == '\'')
 		{
-			end = runtilfree(end, *end, NULL, 0);
+			end = runtilfree(end + 1, *end);
 			matrix[i] = cuttoken(bgn, end);
 			end = jumpspace(end);
 			bgn = end;
