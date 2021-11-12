@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/10 12:53:00 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/12 15:34:57 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**get_argv(t_split *data, char *name)
 	argv[i] = NULL;
 	return (argv);
 }
-
+/*
 static
 void	ms_run_prog(t_list **head, t_split *data)
 {
@@ -61,9 +61,31 @@ void	ms_run_prog(t_list **head, t_split *data)
 	else
 		printf("%s: command not found\n", data->tokens[0]);
 }
-
-int	ms_execute(t_list **head, t_split *data )
+*/
+int	ms_execute(t_list **head, t_list **lsthead)
 {
+	t_list	*run;
+	t_split	*content;
+	int		i;
+
+	if (!head)
+		return (0);
+	run = *lsthead;
+	while (run)
+	{
+		content = (t_split *)(run->content);
+		i = 0;
+		while (content->tokens[i])
+		{
+			printf("%s ", content->tokens[i]);
+			i++;
+		}
+		printf("\n");
+		run = run->next;
+	}
+	return (0);
+}
+/*{
 	int	len;
 
 	len = ft_strlen(data->tokens[0]);
@@ -86,4 +108,4 @@ int	ms_execute(t_list **head, t_split *data )
 	else
 		ms_run_prog(head, data);
 	return (0);
-}
+}*/

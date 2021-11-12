@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:22:03 by graja             #+#    #+#             */
-/*   Updated: 2021/11/11 17:15:11 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/12 10:57:24 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,16 @@ int	chk_single(char *str)
 	return (1);
 }
 
-void	scan_input(char *input, t_list **head)
+void	scan_input(char *input, t_list **head, t_list **lsthead)
 {
+	char	**matrix;
+
 	if (!input)
 		return ;
 	check_and_insert_spaces(&input);
 	input = cleanup(input);
-	printf("Trimmed: >>>%s\n", input);
-	ms_cut_tokens(input, head);
+	matrix = ms_cut_tokens(input, head);
+	if (matrix)
+		ms_populate_cmdlst(matrix, lsthead);
 	free(input);
 }

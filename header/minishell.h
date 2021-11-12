@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/11 14:16:07 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/12 15:33:11 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,16 @@
 
 typedef struct s_split
 {
-	int		i;
-	char	tokens[40][200];
+	char	**tokens;
+	char	*iname;
+	char	*oname;
+	int		redi;
+	int		redo;
+	int		appi;
+	int		appo;
+	int		fdout;
+	int		fdin;
+	int		err;
 }		t_split;
 
 typedef struct s_env
@@ -48,15 +56,17 @@ void	ms_builtin_echo(t_split *data);
 void	ms_builtin_export(t_list **head, t_split *data);
 void	ms_builtin_unset(t_list **head, t_split *data);
 void	ms_delentry(void *lst);
-void	scan_input(char *input, t_list **head);
+void	scan_input(char *input, t_list **head, t_list **lsthead);
 void	expand_envvars(char **matrix, t_list **head);
+void	ms_populate_cmdlst(char **matrix, t_list **lsthead);
+void	ms_init_shell(t_list **head, t_list **lsthead);
 int		ms_add2list(t_list **ehead, char *str);
 int		ms_init_env(t_list **ehead, char **env);
 int		ms_insnewlst(t_list **head, char *name, char *val);
 int		ms_putenv(t_list **head, char *name, char *val);
 int		ms_builtin_cd(t_list **head, t_split *data);
 int		ms_builtin_env(t_list **head);
-int		ms_execute(t_list **head, t_split *data );
+int		ms_execute(t_list **head, t_list **lsthead);
 int		ms_getenvnbr(t_list **head);
 int		expand_or_not(char **matrix, int i);
 int		chk_single(char *str);
