@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 10:51:27 by graja             #+#    #+#             */
-/*   Updated: 2021/11/12 15:46:18 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/12 15:53:44 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	ms_populate_cmdlst(char **matrix, t_list **lsthead)
 	int		n;
 
 	i = 0;
-	if (!matrix || !lsthead)
-		return ;
 	while (matrix && matrix[i])
 	{
 		n = get_numbr_token(matrix, i);
@@ -67,7 +65,7 @@ void	ms_populate_cmdlst(char **matrix, t_list **lsthead)
 			content->tokens = ft_calloc(n + 1, sizeof(char *));
 			cpy_tokens(matrix, content->tokens, i, n);
 			ft_lstadd_back(lsthead, ft_lstnew(content));
-			i += n; 
+			i += n;
 		}
 		else
 		{
