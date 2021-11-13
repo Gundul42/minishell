@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/12 15:34:57 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/13 17:53:39 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	ms_run_prog(t_list **head, t_split *data)
 		printf("%s: command not found\n", data->tokens[0]);
 }
 */
+
 int	ms_execute(t_list **head, t_list **lsthead)
 {
 	t_list	*run;
@@ -81,6 +82,8 @@ int	ms_execute(t_list **head, t_list **lsthead)
 			i++;
 		}
 		printf("\n");
+		printf("%d %d %s\n", content->redi, content->appi, content->iname);
+		printf("%d %d %s\n", content->redo, content->appo, content->oname);
 		run = run->next;
 	}
 	return (0);
