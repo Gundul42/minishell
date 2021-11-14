@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:58:10 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 18:22:07 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 09:23:09 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**ms_exportenv(t_list **head)
 	return (arr);
 }
 
-/* returns the number of entries in the env list */
+/* returns the number of entries in a linked list */
 int	ms_getenvnbr(t_list **head)
 {
 	int		i;

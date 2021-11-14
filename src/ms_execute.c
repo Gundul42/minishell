@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/13 17:53:39 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 10:16:30 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**get_argv(t_split *data, char *name)
 	argv[i] = NULL;
 	return (argv);
 }
-/*
+
 static
 void	ms_run_prog(t_list **head, t_split *data)
 {
@@ -61,34 +61,10 @@ void	ms_run_prog(t_list **head, t_split *data)
 	else
 		printf("%s: command not found\n", data->tokens[0]);
 }
-*/
 
-int	ms_execute(t_list **head, t_list **lsthead)
+static
+int	ms_builtin(t_split *data, t_list **head)
 {
-	t_list	*run;
-	t_split	*content;
-	int		i;
-
-	if (!head)
-		return (0);
-	run = *lsthead;
-	while (run)
-	{
-		content = (t_split *)(run->content);
-		i = 0;
-		while (content->tokens[i])
-		{
-			printf("%s ", content->tokens[i]);
-			i++;
-		}
-		printf("\n");
-		printf("%d %d %s\n", content->redi, content->appi, content->iname);
-		printf("%d %d %s\n", content->redo, content->appo, content->oname);
-		run = run->next;
-	}
-	return (0);
-}
-/*{
 	int	len;
 
 	len = ft_strlen(data->tokens[0]);
@@ -111,4 +87,38 @@ int	ms_execute(t_list **head, t_list **lsthead)
 	else
 		ms_run_prog(head, data);
 	return (0);
-}*/
+}
+
+static
+void	ms_debug(t_split *content)
+{
+	int	i;
+
+	i = 0;
+	while (content->tokens[i])
+	{
+		printf("%s ", content->tokens[i]);
+		i++;
+	}
+	printf("\n");
+	printf("%d %d %s\n", content->redi, content->appi, content->iname);
+	printf("%d %d %s\n", content->redo, content->appo, content->oname);
+}
+
+int	ms_execute(t_list **head, t_list **lsthead)
+{
+	t_split	*content;
+	int		err;
+
+	if (!head || !lsthead)
+		return (0);
+	err = 0;
+	while (*lsthead && err >= 0)
+	{
+		content = (t_split *)((*lsthead)->content);
+		ms_debug(content);
+		err = ms_builtin(content, head);
+		ms_delfirst_entry(lsthead);
+	}
+	return (err);
+}

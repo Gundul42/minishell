@@ -6,7 +6,7 @@
 #    By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 13:23:33 by graja             #+#    #+#              #
-#    Updated: 2021/11/13 14:50:27 by graja            ###   ########.fr        #
+#    Updated: 2021/11/14 09:40:08 by graja            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC		= src/ms_enviro.c src/main.c src/ms_prompt.c \
 		 src/ms_builtin_unset.c src/ms_files.c src/ms_sortenv.c \
 		 src/token_check_and_insert_spaces.c src/scanner.c \
 		 src/ms_cutter.c src/ms_expansion.c src/ms_populatelst.c \
-		 src/ms_read_arguments.c
+		 src/ms_read_arguments.c src/ms_delfirst_entry.c
 CC		= gcc
 FLAGS		= -Wall -Wextra -Werror -pthread
 RM		= rm -f

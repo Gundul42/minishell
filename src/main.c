@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/13 17:53:04 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 10:09:10 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ms_init_shell(t_list **head, t_list **lsthead)
 			add_history(input);
 		scan_input(input, head, lsthead);
 		ms_read_arguments(lsthead);
-		ms_execute(head, lsthead);
+		err = ms_execute(head, lsthead);
 	}
 }
 
