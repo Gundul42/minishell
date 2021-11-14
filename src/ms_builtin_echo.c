@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:46:07 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 12:23:45 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 13:58:34 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ms_builtin_echo(t_split *data)
 
 	i = 1;
 	flag = 0;
-	if (!ft_strncmp(data->tokens[1], "-n", ft_strlen(data->tokens[1])))
+	if (ft_strlen(data->tokens[1]) == 2 && !ft_strncmp(data->tokens[1], "-n\0", 3))
 	{
 		flag = 1;
 		i++;

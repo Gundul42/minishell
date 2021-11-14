@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 10:37:13 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 15:56:34 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,10 @@ int	ms_execute(t_list **head, t_list **lsthead)
 	{
 		content = (t_split *)((*lsthead)->content);
 		ms_debug(content);
+		err = ms_redirect(content);
+		printf("%d\n", err);
 		err = ms_builtin(content, head);
+		err = ms_close_redir(content);
 		ms_delfirst_entry(lsthead);
 	}
 	return (err);

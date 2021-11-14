@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 09:39:33 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 15:55:37 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int		ms_execute(t_list **head, t_list **lsthead);
 int		ms_getenvnbr(t_list **head);
 int		expand_or_not(char **matrix, int i);
 int		chk_single(char *str);
+int		ms_redirect(t_split *content);
+int		ms_close_redir(t_split *ptr);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);
