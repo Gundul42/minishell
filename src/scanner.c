@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:22:03 by graja             #+#    #+#             */
-/*   Updated: 2021/11/12 10:57:24 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 11:28:15 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	chk_single(char *str)
 {
 	if (ft_strlen(str) < 2)
 		return (1);
+	if (*str == '$' && *(str + 1) == '?')
+		return (0);
 	if (*str == '$' && ft_isalnum(*(str + 1)))
 		return (0);
 	return (1);

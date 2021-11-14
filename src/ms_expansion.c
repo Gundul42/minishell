@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:48:10 by graja             #+#    #+#             */
-/*   Updated: 2021/11/11 17:17:14 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 12:37:21 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	exp_findexit(char *str)
 	int	n;
 
 	n = 0;
+	if (*str == '?')
+		return (1);
 	while (*str && ft_isalnum(*str))
 	{
 		str++;
@@ -50,7 +52,12 @@ char	*exp_make(char *old, char *insert, int entry, int exit)
 	if (insert)
 		len += ft_strlen(insert);
 	else
-		insert = "\0";
+	{
+		new = ft_calloc(len + 1, sizeof(char));
+		ft_strlcpy(new, old, entry);
+		ft_strlcat(new, old + entry + exit + 1, len);
+		return (new);
+	}
 	new = ft_calloc(len + 1, sizeof(char));
 	if (!new)
 		return (NULL);

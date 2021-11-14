@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 10:16:30 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 10:37:13 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ms_run_prog(t_list **head, t_split *data)
 	}
 	else
 		printf("%s: command not found\n", data->tokens[0]);
+	ms_putenv(head, "?", ft_itoa(status));
 }
 
 static
