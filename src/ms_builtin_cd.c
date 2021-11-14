@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:52:00 by graja             #+#    #+#             */
-/*   Updated: 2021/10/28 17:03:43 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/14 10:21:01 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ms_builtin_cd(t_list **head, t_split *data)
 {
 	int	err;
 
-	if (!head || !data || !data->tokens[1])
+	if (!head || !data || !data->tokens[0])
 		return (1);
 	if (!ft_strlen(data->tokens[1]))
 		err = chdir(ms_getenv(*head, "HOME"));
