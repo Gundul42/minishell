@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 14:40:37 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 16:25:38 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_split
 	int		appo;
 	int		fdout;
 	int		fdin;
+	int		pcpyin;
+	int		pcpyout;
 	int		piped;
 	int		pipenbr;
 	int		*pipefd;
@@ -77,6 +79,8 @@ int		chk_single(char *str);
 int		ms_redirect(t_split *content);
 int		ms_close_redir(t_split *ptr);
 int		init_pipes(t_list **lsthead);
+int		ms_check_and_open(t_split *ptr);
+int		ms_check_and_close(t_split *ptr);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);

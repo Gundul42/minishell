@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 14:57:18 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 16:56:36 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	ms_builtin(t_split *data, t_list **head)
 	int	len;
 
 	len = ft_strlen(data->tokens[0]);
+	ms_check_and_open(data);
 	if (!len)
 		return (0);
 	else if (len > 3 && !strncmp(data->tokens[0], "exit", len))
@@ -90,6 +91,7 @@ int	ms_builtin(t_split *data, t_list **head)
 		ms_builtin_unset(head, data);
 	else
 		ms_run_prog(head, data);
+	ms_check_and_close(data);
 	return (0);
 }
 
@@ -107,7 +109,7 @@ void	ms_debug(t_split *content)
 	{
 		while (i <= (content->piped * 2) - 1 )
 		{
-			printf("fd(%d) = %d\n", i, content->pipefd[i]);
+			printf("fd(%d) = %d\n\n", i, content->pipefd[i]);
 			i++;
 		}
 	}
@@ -117,7 +119,6 @@ int	ms_execute(t_list **head, t_list **lsthead)
 {
 	t_split	*content;
 	int		err;
-	int		fd[2];
 
 	err = 0;
 	if (!head || !lsthead)
