@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 14:03:04 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 14:57:18 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ void	ms_debug(t_split *content)
 	printf("%d %d %s\n", content->redi, content->appi, content->iname);
 	printf("%d %d %s\n", content->redo, content->appo, content->oname);
 	printf("\n");
-	if (content->piped == content->pipenbr)
+	if ((content->piped - 1) == content->pipenbr)
 	{
-		while (i <= content->piped)
+		while (i <= (content->piped * 2) - 1 )
 		{
 			printf("fd(%d) = %d\n", i, content->pipefd[i]);
 			i++;
@@ -119,11 +119,11 @@ int	ms_execute(t_list **head, t_list **lsthead)
 	int		err;
 	int		fd[2];
 
+	err = 0;
 	if (!head || !lsthead)
 		return (0);
-	err = pipe(fd);
 	if (ft_lstsize(*lsthead) > 1)
-		init_pipes(lsthead);
+		err = err | init_pipes(lsthead);
 	while (*lsthead && err >= 0)
 	{
 		content = (t_split *)((*lsthead)->content);

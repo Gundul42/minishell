@@ -6,13 +6,13 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 12:45:58 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 14:02:53 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 14:54:16 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-void	init_pipes(t_list **lsthead)
+int	init_pipes(t_list **lsthead)
 {
 	int	size;
 	int	i;
@@ -21,7 +21,9 @@ void	init_pipes(t_list **lsthead)
 	t_list	*run;
 
 	size = ft_lstsize(*lsthead);
-	fd = calloc(size, sizeof(int));
+	fd = calloc((size - 1) * 2, sizeof(int));
+	if (!fd)
+		return (1);
 	i = 0;
 	run = *lsthead;
 	while (i < size)
@@ -30,7 +32,13 @@ void	init_pipes(t_list **lsthead)
 		content->piped = size - 1;
 		content->pipenbr = i;
 		content->pipefd = fd;
+		if (i < size - 1)
+		{
+			if (pipe(fd + i * 2) == -1)
+				return (2);
+		}
 		i++;
 		run = run->next;
 	}
+	return (0);
 }
