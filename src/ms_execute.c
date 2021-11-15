@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 15:56:34 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 10:24:21 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	ms_run_prog(t_list **head, t_split *data)
 	int		status;
 	pid_t	pid;
 
+	pid = 0;
+	status = 0;
+	name = NULL;
 	name = ms_file_exists(data->tokens[0], ms_getenv(*head, "PATH"), 0);
 	if (name)
 	{
@@ -90,6 +93,7 @@ int	ms_builtin(t_split *data, t_list **head)
 	return (0);
 }
 
+/*
 static
 void	ms_debug(t_split *content)
 {
@@ -104,7 +108,7 @@ void	ms_debug(t_split *content)
 	printf("\n");
 	printf("%d %d %s\n", content->redi, content->appi, content->iname);
 	printf("%d %d %s\n", content->redo, content->appo, content->oname);
-}
+}*/
 
 int	ms_execute(t_list **head, t_list **lsthead)
 {
@@ -117,9 +121,8 @@ int	ms_execute(t_list **head, t_list **lsthead)
 	while (*lsthead && err >= 0)
 	{
 		content = (t_split *)((*lsthead)->content);
-		ms_debug(content);
+		/*ms_debug(content);*/
 		err = ms_redirect(content);
-		printf("%d\n", err);
 		err = ms_builtin(content, head);
 		err = ms_close_redir(content);
 		ms_delfirst_entry(lsthead);

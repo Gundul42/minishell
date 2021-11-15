@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:57:50 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 17:25:18 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 10:26:41 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ int	handle_output(t_split *ptr)
 {
 	int	fd;
 
-	if (ptr->redo)
+	fd = 0;
+	if (ptr->redo == 1)
 		fd = open(ptr->oname, O_WRONLY | O_CREAT, 0644);
-	else if (ptr->appo)
+	else if (ptr->appo == 1)
 		fd = open(ptr->oname, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 		return (1);
