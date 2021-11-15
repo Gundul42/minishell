@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 15:55:37 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 13:31:45 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ typedef struct s_split
 	int		appo;
 	int		fdout;
 	int		fdin;
-	int		err;
+	int		piped;
+	int		pipenbr;
+	int		*pipefd;
 }		t_split;
 
 typedef struct s_env
@@ -62,6 +64,7 @@ void	ms_populate_cmdlst(char **matrix, t_list **lsthead);
 void	ms_init_shell(t_list **head, t_list **lsthead);
 void	ms_read_arguments(t_list **lsthead);
 void	ms_delfirst_entry(t_list **head);
+void	init_pipes(t_list **lsthead);
 int		ms_add2list(t_list **ehead, char *str);
 int		ms_init_env(t_list **ehead, char **env);
 int		ms_insnewlst(t_list **head, char *name, char *val);

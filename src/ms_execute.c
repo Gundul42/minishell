@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 11:27:30 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 14:03:04 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,37 +93,44 @@ int	ms_builtin(t_split *data, t_list **head)
 	return (0);
 }
 
-/*
 static
 void	ms_debug(t_split *content)
 {
 	int	i;
 
 	i = 0;
-	while (content->tokens[i])
-	{
-		printf("%s ", content->tokens[i]);
-		i++;
-	}
-	printf("\n");
+	printf("fd(%d)\n", content->pipenbr);
 	printf("%d %d %s\n", content->redi, content->appi, content->iname);
 	printf("%d %d %s\n", content->redo, content->appo, content->oname);
-}*/
+	printf("\n");
+	if (content->piped == content->pipenbr)
+	{
+		while (i <= content->piped)
+		{
+			printf("fd(%d) = %d\n", i, content->pipefd[i]);
+			i++;
+		}
+	}
+}
 
 int	ms_execute(t_list **head, t_list **lsthead)
 {
 	t_split	*content;
 	int		err;
+	int		fd[2];
 
 	if (!head || !lsthead)
 		return (0);
-	err = 0;
+	err = pipe(fd);
+	if (ft_lstsize(*lsthead) > 1)
+		init_pipes(lsthead);
 	while (*lsthead && err >= 0)
 	{
 		content = (t_split *)((*lsthead)->content);
 		err = ms_redirect(content);
 		err = err | ms_builtin(content, head);
 		err = err | ms_close_redir(content);
+		ms_debug(content);
 		ms_delfirst_entry(lsthead);
 	}
 	return (err);
