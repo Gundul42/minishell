@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 16:56:36 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/15 18:12:14 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ms_run_prog(t_list **head, t_split *data)
 		pid = fork();
 		if (!pid)
 		{
+			ms_check_and_open(data);
 			printf("%d\n", execve(name, get_argv(data, name), \
 						ms_exportenv(head)));
 		}
@@ -67,15 +68,37 @@ void	ms_run_prog(t_list **head, t_split *data)
 }
 
 static
+int	chk_builtin(t_split *data, int len)
+{
+	if (!len)
+		return (0);
+	else if (len > 3 && !strncmp(data->tokens[0], "exit", len))
+		return (1);
+	else if (len > 1 && !strncmp(data->tokens[0], "cd", len))
+		return (1);
+	else if (len > 2 && !strncmp(data->tokens[0], "env", len))
+		return (1);
+	else if (len > 2 && !strncmp(data->tokens[0], "pwd", len))
+		return (1);
+	else if (len > 3 && !strncmp(data->tokens[0], "echo", len))
+		return (1);
+	else if (len > 5 && !strncmp(data->tokens[0], "export", len))
+		return (1);
+	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))
+		return (1);
+	return (0);
+
+}
+
+static
 int	ms_builtin(t_split *data, t_list **head)
 {
 	int	len;
 
 	len = ft_strlen(data->tokens[0]);
-	ms_check_and_open(data);
-	if (!len)
-		return (0);
-	else if (len > 3 && !strncmp(data->tokens[0], "exit", len))
+	if (chk_builtin(data, len))
+		ms_check_and_open(data);
+	if (len > 3 && !strncmp(data->tokens[0], "exit", len))
 		return (-1);
 	else if (len > 1 && !strncmp(data->tokens[0], "cd", len))
 		ms_builtin_cd(head, data);
@@ -89,9 +112,9 @@ int	ms_builtin(t_split *data, t_list **head)
 		ms_builtin_export(head, data);
 	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))
 		ms_builtin_unset(head, data);
-	else
+	else if (len)
 		ms_run_prog(head, data);
-	ms_check_and_close(data);
+/*	ms_check_and_close(data);*/
 	return (0);
 }
 
