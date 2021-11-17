@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 16:25:38 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/16 18:17:23 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void	ms_populate_cmdlst(char **matrix, t_list **lsthead);
 void	ms_init_shell(t_list **head, t_list **lsthead);
 void	ms_read_arguments(t_list **lsthead);
 void	ms_delfirst_entry(t_list **head);
+void	pipe_exec(char *name, t_list **head, t_split *data);
+void	ms_debug(t_split *content);
+void	close_pipes(t_split *data);
+void	close_one_pipe(t_split *data);
+void	built_exec(t_split *data);
 int		ms_add2list(t_list **ehead, char *str);
 int		ms_init_env(t_list **ehead, char **env);
 int		ms_insnewlst(t_list **head, char *name, char *val);
@@ -81,6 +86,7 @@ int		ms_close_redir(t_split *ptr);
 int		init_pipes(t_list **lsthead);
 int		ms_check_and_open(t_split *ptr);
 int		ms_check_and_close(t_split *ptr);
+int		chk_builtin(t_split *data, int len);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);

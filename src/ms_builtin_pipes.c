@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:39:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 17:25:54 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/16 18:17:10 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,29 @@ int	ms_check_and_close(t_split *ptr)
 		close(ptr->pcpyin);
 	}
 	return (0);
-}	
+}
+
+void	built_exec(t_split *data)
+{
+	int	in;
+
+	if (data->piped < 1)
+		return ;
+	else
+	{
+		in = data->pipenbr * 2;
+		ms_debug(data);
+		printf("TTL %d,  ACT %d", data->piped, data->pipenbr);
+		printf(", FDin %d,", data->pipefd[in - 1]);
+		printf("FDout %d\n\n", data->pipefd[in]);
+		if (data->pipenbr == 0)
+			dup2(data->pipefd[1], STDOUT_FILENO);
+		else if (data->pipenbr > 0 && data->pipenbr != data->piped)
+		{
+			dup2(data->pipefd[in - 2], STDIN_FILENO);
+			dup2(data->pipefd[in + 1], STDOUT_FILENO);
+		}
+		else if (data->pipenbr == data->piped)
+			dup2(data->pipefd[in - 2], STDIN_FILENO);
+	}
+}

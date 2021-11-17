@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/15 18:12:14 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/17 11:35:13 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,7 @@ void	ms_run_prog(t_list **head, t_split *data)
 		pid = fork();
 		if (!pid)
 		{
-			ms_check_and_open(data);
-			printf("%d\n", execve(name, get_argv(data, name), \
-						ms_exportenv(head)));
+			pipe_exec(name, head, data);
 		}
 		else
 		{
@@ -64,40 +62,21 @@ void	ms_run_prog(t_list **head, t_split *data)
 	}
 	else
 		printf("%s: command not found\n", data->tokens[0]);
+	close_one_pipe(data);
 	ms_putenv(head, "?", ft_itoa(status));
-}
-
-static
-int	chk_builtin(t_split *data, int len)
-{
-	if (!len)
-		return (0);
-	else if (len > 3 && !strncmp(data->tokens[0], "exit", len))
-		return (1);
-	else if (len > 1 && !strncmp(data->tokens[0], "cd", len))
-		return (1);
-	else if (len > 2 && !strncmp(data->tokens[0], "env", len))
-		return (1);
-	else if (len > 2 && !strncmp(data->tokens[0], "pwd", len))
-		return (1);
-	else if (len > 3 && !strncmp(data->tokens[0], "echo", len))
-		return (1);
-	else if (len > 5 && !strncmp(data->tokens[0], "export", len))
-		return (1);
-	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))
-		return (1);
-	return (0);
-
 }
 
 static
 int	ms_builtin(t_split *data, t_list **head)
 {
 	int	len;
+	int	blt;
 
 	len = ft_strlen(data->tokens[0]);
-	if (chk_builtin(data, len))
-		ms_check_and_open(data);
+	blt = chk_builtin(data, len);
+	if (blt)
+		built_exec(data);
+/*		ms_check_and_open(data);*/
 	if (len > 3 && !strncmp(data->tokens[0], "exit", len))
 		return (-1);
 	else if (len > 1 && !strncmp(data->tokens[0], "cd", len))
@@ -114,11 +93,12 @@ int	ms_builtin(t_split *data, t_list **head)
 		ms_builtin_unset(head, data);
 	else if (len)
 		ms_run_prog(head, data);
-/*	ms_check_and_close(data);*/
+	if (blt)
+		close_pipes(data);
+		/*ms_check_and_close(data);*/
 	return (0);
 }
 
-static
 void	ms_debug(t_split *content)
 {
 	int	i;
@@ -128,14 +108,12 @@ void	ms_debug(t_split *content)
 	printf("%d %d %s\n", content->redi, content->appi, content->iname);
 	printf("%d %d %s\n", content->redo, content->appo, content->oname);
 	printf("\n");
-	if ((content->piped - 1) == content->pipenbr)
-	{
 		while (i <= (content->piped * 2) - 1 )
 		{
-			printf("fd(%d) = %d\n\n", i, content->pipefd[i]);
+			printf("fd(%d) = %d\n", i, content->pipefd[i]);
 			i++;
 		}
-	}
+		printf("\n");
 }
 
 int	ms_execute(t_list **head, t_list **lsthead)
@@ -154,7 +132,6 @@ int	ms_execute(t_list **head, t_list **lsthead)
 		err = ms_redirect(content);
 		err = err | ms_builtin(content, head);
 		err = err | ms_close_redir(content);
-		ms_debug(content);
 		ms_delfirst_entry(lsthead);
 	}
 	return (err);
