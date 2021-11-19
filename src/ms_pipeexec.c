@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:07:08 by graja             #+#    #+#             */
-/*   Updated: 2021/11/19 11:57:21 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/19 13:40:53 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	close_one_pipe(t_split *data)
 {
 	int	in;
 
-	if (data->piped < 2)
+	if (data->piped < 1)
 		return ;
 	in = data->pipenbr * 2;
 	if (!data->pipenbr)
@@ -47,8 +47,9 @@ void	close_pipes(t_split *data)
 	if (data->piped < 1)
 		return ;
 	in = data->piped * 2 + 1;
+	printf("maxpipe = %d\n", in);
 	i = 0;
-	while (i < in)
+	while (i <= in)
 	{
 		close(data->pipefd[i]);
 		i++;

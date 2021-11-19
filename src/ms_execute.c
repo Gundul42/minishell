@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/19 11:10:11 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/19 12:41:23 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,45 +70,10 @@ int	ms_builtin(t_split *data, t_list **head)
 	len = ft_strlen(data->tokens[0]);
 	blt = chk_builtin(data, len);
 	if (blt)
-		built_exec(data);
-/*		ms_check_and_open(data);*/
-	if (len > 3 && !strncmp(data->tokens[0], "exit", len))
-		return (-1);
-	else if (len > 1 && !strncmp(data->tokens[0], "cd", len))
-		ms_builtin_cd(head, data);
-	else if (len > 2 && !strncmp(data->tokens[0], "env", len))
-		ms_builtin_env(head);
-	else if (len > 2 && !strncmp(data->tokens[0], "pwd", len))
-		ms_builtin_pwd(head);
-	else if (len > 3 && !strncmp(data->tokens[0], "echo", len))
-		ms_builtin_echo(data);
-	else if (len > 5 && !strncmp(data->tokens[0], "export", len))
-		ms_builtin_export(head, data);
-	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))
-		ms_builtin_unset(head, data);
-	else if (len)
+		return (built_exec(data, head, len));
+	else if (!blt && len)
 		ms_run_prog(head, data);
-	if (blt)
-		close_pipes(data);
-		/*ms_check_and_close(data);*/
 	return (0);
-}
-
-void	ms_debug(t_split *content)
-{
-	int	i;
-
-	i = 0;
-	printf("fd(%d)\n", content->pipenbr);
-	printf("%d %d %s\n", content->redi, content->appi, content->iname);
-	printf("%d %d %s\n", content->redo, content->appo, content->oname);
-	printf("\n");
-		while (i <= (content->piped * 2) - 1 )
-		{
-			printf("fd(%d) = %d\n", i, content->pipefd[i]);
-			i++;
-		}
-		printf("\n");
 }
 
 int	ms_execute(t_list **head, t_list **lsthead)

@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/16 18:17:23 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/19 12:42:40 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,9 @@ void	ms_init_shell(t_list **head, t_list **lsthead);
 void	ms_read_arguments(t_list **lsthead);
 void	ms_delfirst_entry(t_list **head);
 void	pipe_exec(char *name, t_list **head, t_split *data);
-void	ms_debug(t_split *content);
 void	close_pipes(t_split *data);
 void	close_one_pipe(t_split *data);
-void	built_exec(t_split *data);
+int		built_exec(t_split *data, t_list **head, int len);
 int		ms_add2list(t_list **ehead, char *str);
 int		ms_init_env(t_list **ehead, char **env);
 int		ms_insnewlst(t_list **head, char *name, char *val);
