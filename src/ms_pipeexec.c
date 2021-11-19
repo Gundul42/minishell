@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:07:08 by graja             #+#    #+#             */
-/*   Updated: 2021/11/19 13:40:53 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/19 14:51:13 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ void	close_one_pipe(t_split *data)
 		close(data->pipefd[in - 2]);
 	}
 	else if (data->pipenbr == data->piped)
-
+	{
 		close(data->pipefd[in - 2]);
+		free(data->pipefd);
+	}
 }
 
 /* This is for INSIDE child process, it closes every single fd
@@ -47,7 +49,6 @@ void	close_pipes(t_split *data)
 	if (data->piped < 1)
 		return ;
 	in = data->piped * 2 + 1;
-	printf("maxpipe = %d\n", in);
 	i = 0;
 	while (i <= in)
 	{
