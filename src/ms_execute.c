@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/18 09:01:16 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/19 11:10:11 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,12 @@ void	ms_run_prog(t_list **head, t_split *data)
 	{
 		pid = fork();
 		if (!pid)
-		{
 			pipe_exec(name, head, data);
-		}
-		else
-		{
-			waitpid(pid, &status, 0);
-			free(name);
-		}
 	}
 	else
 		printf("%s: command not found\n", data->tokens[0]);
+	waitpid(pid, &status, 0);
+	free(name);
 	close_one_pipe(data);
 	ms_putenv(head, "?", ft_itoa(status));
 }
