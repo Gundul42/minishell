@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/19 12:42:40 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/20 13:37:18 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_env
 	char	*value;
 }		t_env;
 
+void	define_input_signals(void);
 void	check_and_insert_spaces(char **line);
 void	ms_input_parser(char *input, t_split *data);
 void	ms_builtin_pwd(t_list **head);
