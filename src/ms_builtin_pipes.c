@@ -6,35 +6,17 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:39:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/19 12:43:29 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/20 10:35:19 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
-
-static
-void	open_pipbuiltin(t_split *data)
-{
-	int	in;
-
-	if (data->piped < 1)
-		return ;
-	else
-	{
-		in = data->pipenbr * 2;
-		if (data->pipenbr != data->piped)
-			dup2(data->pipefd[in + 1], STDOUT_FILENO);
-		if (data->pipenbr > 0 )
-			dup2(data->pipefd[in - 2], STDIN_FILENO);
-	}
-}
 
 int	built_exec(t_split *data, t_list **head, int len)
 {
 	int	err;
 
 	err = 0;
-	open_pipbuiltin(data);
 	if (len > 3 && !strncmp(data->tokens[0], "exit", len))
 		err = -1;
 	else if (len > 1 && !strncmp(data->tokens[0], "cd", len))
