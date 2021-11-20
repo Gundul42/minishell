@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:16:28 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 16:28:23 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/20 16:07:08 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ms_putenv(t_list **head, char *name, char *val)
 	while (iter)
 	{
 		ptr = (t_env *)(iter->content);
-		if (!ft_strncmp(ptr->name, name, ft_strlen(name)))
+		if (!ft_strncmp(ptr->name, name, ft_strlen(name) + 1))
 			break ;
 		iter = iter->next;
 	}

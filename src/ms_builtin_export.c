@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:57:47 by graja             #+#    #+#             */
-/*   Updated: 2021/11/20 15:05:15 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/20 16:06:54 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,6 @@ char	*trimmer(char *old)
 	return (new);
 }
 
-static
-void	free_em_all(char **new)
-{
-	int	j;
-
-	j = 0;
-	while (new[j])
-	{
-		free(new[j]);
-		j++;
-	}
-	if (new)
-		free(new);
-}
-
 void	ms_builtin_export(t_list **head, t_split *data)
 {
 	char	**new;
@@ -94,8 +79,10 @@ void	ms_builtin_export(t_list **head, t_split *data)
 			{
 				new[1] = trimmer(new[1]);
 				ms_putenv(head, new[0], new[1]);
+				free(new[0]);
+				free(new[1]);
+				free(new);
 			}
-			free_em_all(new);
 		}
 		i++;
 	}
