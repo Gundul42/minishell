@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:57:47 by graja             #+#    #+#             */
-/*   Updated: 2021/11/03 16:23:00 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/20 15:05:15 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,36 @@ void	ms_printexp(t_list **head)
 	free(ptr);
 }
 
+static
+char	*trimmer(char *old)
+{
+	char	*new;
+
+	if (old[0] == '\"')
+		new = ft_strtrim(old, "\"");
+	else if (old[0] == '\'')
+		new = ft_strtrim(old, "\'");
+	else
+		return (old);
+	free(old);
+	return (new);
+}
+
+static
+void	free_em_all(char **new)
+{
+	int	j;
+
+	j = 0;
+	while (new[j])
+	{
+		free(new[j]);
+		j++;
+	}
+	if (new)
+		free(new);
+}
+
 void	ms_builtin_export(t_list **head, t_split *data)
 {
 	char	**new;
@@ -61,13 +91,11 @@ void	ms_builtin_export(t_list **head, t_split *data)
 		{
 			new = ms_split(data->tokens[i]);
 			if (new[0] && new[1])
+			{
+				new[1] = trimmer(new[1]);
 				ms_putenv(head, new[0], new[1]);
-			if (new[0])
-				free(new[0]);
-			if (new[1])
-				free(new[1]);
-			if (new)
-				free(new);
+			}
+			free_em_all(new);
 		}
 		i++;
 	}

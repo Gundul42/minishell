@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:39:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/20 13:08:02 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/20 15:04:33 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	built_pipe(t_split *data)
 		in = data->pipenbr * 2;
 		if (data->pipenbr != data->piped)
 			dup2(data->pipefd[in + 1], STDOUT_FILENO);
-		if (data->pipenbr > 0 )
+		if (data->pipenbr > 0)
 			dup2(data->pipefd[in - 2], STDIN_FILENO);
 	}
 }
@@ -52,8 +52,8 @@ static
 void	destroy_pipe(t_split *data)
 {
 	{
-		dup2(data->pcpyin ,STDIN_FILENO);
-		dup2(data->pcpyout ,STDOUT_FILENO);
+		dup2(data->pcpyin, STDIN_FILENO);
+		dup2(data->pcpyout, STDOUT_FILENO);
 		close(data->pcpyin);
 		close(data->pcpyout);
 	}
@@ -88,9 +88,9 @@ int	built_exec(t_split *data, t_list **head, int len)
 		err = run_builtin(data, head, len);
 	else
 	{
-			built_pipe(data);
-			err = run_builtin(data, head, len);
-			destroy_pipe(data);
+		built_pipe(data);
+		err = run_builtin(data, head, len);
+		destroy_pipe(data);
 	}
 	close_one_pipe(data);
 	return (err);
