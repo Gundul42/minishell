@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:57:50 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 15:17:30 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 16:54:12 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	ms_close_redir(t_split *ptr)
 	int	err;
 
 	err = 0;
-	if (ptr->redi)
+	if (ptr->fdin > 0)
 	{
 		err = dup2(ptr->fdin, STDIN_FILENO);
 		close(ptr->fdin);
 	}
-	if (ptr->redo || ptr->appo)
+	if (ptr->fdout > 0)
 	{
 		err = err | dup2(ptr->fdout, STDOUT_FILENO);
 		close(ptr->fdout);

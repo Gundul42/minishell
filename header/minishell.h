@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 13:26:41 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 16:42:00 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_split
 	char	**tokens;
 	char	*iname;
 	char	*oname;
+	int		err;
 	int		redi;
 	int		redo;
 	int		appi;
