@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:57:50 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 12:50:20 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 15:17:30 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ int	handle_input(t_split *ptr)
 {
 	int	fd;
 
-	fd = open(ptr->iname, O_RDONLY, 0777);
+	fd = open(ptr->iname, O_RDONLY, 0644);
 	if (fd == -1)
+	{
+		ms_print_error(ptr->oname, 0);
 		return (1);
+	}
 	ptr->fdin = dup(STDIN_FILENO);
 	dup2(fd, STDIN_FILENO);
 	if (ptr->fdin == -1)
@@ -34,11 +37,14 @@ int	handle_output(t_split *ptr)
 
 	fd = 0;
 	if (ptr->redo == 1)
-		fd = open(ptr->oname, O_WRONLY | O_EXCL, 0644);
+		fd = open(ptr->oname, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	else if (ptr->appo == 1)
 		fd = open(ptr->oname, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
+	{
+		ms_print_error(ptr->oname, 0);
 		return (1);
+	}
 	ptr->fdout = dup(STDOUT_FILENO);
 	dup2(fd, STDOUT_FILENO);
 	if (ptr->fdout == -1)

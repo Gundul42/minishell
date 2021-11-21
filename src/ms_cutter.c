@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:23:48 by graja             #+#    #+#             */
-/*   Updated: 2021/11/12 10:24:11 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 14:18:55 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	fillmatrix(char **matrix, char *bgn, char *end, int i)
 		{
 			end = runtilfree(end + 1, *end);
 			matrix[i] = cuttoken(bgn, end);
+			printf(">>>%s<<<\n", matrix[i]);
 			end = jumpspace(end);
 			bgn = end;
 			i++;
