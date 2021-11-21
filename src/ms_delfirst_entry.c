@@ -6,13 +6,12 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 09:28:56 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 09:46:45 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 11:12:48 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static
 void	ms_del_cmd(void *lst)
 {
 	t_split	*content;

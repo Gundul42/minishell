@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:22:03 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 11:28:15 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 12:13:49 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void	scan_input(char *input, t_list **head, t_list **lsthead)
 	if (matrix)
 		ms_populate_cmdlst(matrix, lsthead);
 	free(input);
+	free(matrix);
 }

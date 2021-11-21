@@ -6,14 +6,14 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/20 13:36:11 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 11:15:10 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 static
-void	ms_free_env(t_list **head)
+void	ms_free_env(t_list **head, int flag)
 {
 	t_list	**current;
 	t_list	*next;
@@ -24,7 +24,10 @@ void	ms_free_env(t_list **head)
 	while (*current)
 	{
 		next = (*current)->next;
-		ft_lstdelone(*current, &ms_delentry);
+		if (!flag)
+			ft_lstdelone(*current, &ms_delentry);
+		else
+			ft_lstdelone(*current, &ms_del_cmd);
 		*current = next;
 		i++;
 	}
@@ -72,6 +75,7 @@ int	main(void)
 	*lsthead = NULL;
 	ms_init_env(ehead, environ);
 	ms_init_shell(ehead, lsthead);
-	ms_free_env(ehead);
+	ms_free_env(ehead, 0);
+	ms_free_env(lsthead, 1);
 	return (0);
 }
