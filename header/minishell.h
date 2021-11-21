@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 16:42:00 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 17:28:51 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ int		ms_execute(t_list **head, t_list **lsthead);
 int		ms_getenvnbr(t_list **head);
 int		expand_or_not(char **matrix, int i);
 int		chk_single(char *str);
-int		ms_redirect(t_split *content);
-int		ms_close_redir(t_split *ptr);
+int		ms_redirect(t_list **head, t_split *content);
+int		ms_close_redir(t_list **head, t_split *ptr);
 int		init_pipes(t_list **lsthead);
 int		ms_check_and_open(t_split *ptr);
 int		ms_check_and_close(t_split *ptr);
 int		chk_builtin(t_split *data, int len);
-int		ms_print_error(const char *str, int nbr);
+int		ms_print_error(t_list **head, const char *str, int nbr);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);

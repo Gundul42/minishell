@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 16:49:13 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 17:29:01 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,9 @@ void	ms_run_prog(t_list **head, t_split *data)
 			pipe_exec(name, head, data);
 	}
 	else
-		status = ms_print_error(data->tokens[0], 127);
+		status = ms_print_error(head, data->tokens[0], 127);
 	waitpid(pid, &status, 0);
-	free(name);
-	name = ft_itoa(status);
 	close_one_pipe(data);
-	ms_putenv(head, "?", name);
 	free(name);
 }
 
@@ -91,10 +88,10 @@ int	ms_execute(t_list **head, t_list **lsthead)
 	while (*lsthead && err >= 0)
 	{
 		content = (t_split *)((*lsthead)->content);
-		err = ms_redirect(content);
+		err = ms_redirect(head, content);
 		if (!err)
 			err = err | ms_builtin(content, head);
-		err = err | ms_close_redir(content);
+		err = err | ms_close_redir(head, content);
 		ms_delfirst_entry(lsthead);
 	}
 	return (err);

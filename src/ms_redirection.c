@@ -6,32 +6,36 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:57:50 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 16:54:12 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 17:32:14 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 static
-int	handle_input(t_split *ptr)
+int	handle_input(t_list **head, t_split *ptr)
 {
 	int	fd;
 
 	fd = open(ptr->iname, O_RDONLY, 0644);
 	if (fd == -1)
 	{
-		ms_print_error(ptr->oname, 0);
+		ms_print_error(head, ptr->oname, -1);
 		return (1);
 	}
 	ptr->fdin = dup(STDIN_FILENO);
-	dup2(fd, STDIN_FILENO);
+	if (dup2(fd, STDIN_FILENO) == -1)
+		ms_print_error(head, "dup2", -1);
 	if (ptr->fdin == -1)
+	{
+		ms_print_error(head, "dup", -1);
 		return (2);
+	}
 	return (0);
 }
 
 static
-int	handle_output(t_split *ptr)
+int	handle_output(t_list **head, t_split *ptr)
 {
 	int	fd;
 
@@ -42,17 +46,21 @@ int	handle_output(t_split *ptr)
 		fd = open(ptr->oname, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		ms_print_error(ptr->oname, 0);
+		ms_print_error(head, ptr->oname, -1);
 		return (1);
 	}
 	ptr->fdout = dup(STDOUT_FILENO);
-	dup2(fd, STDOUT_FILENO);
+	if (dup2(fd, STDOUT_FILENO) == -1)
+		ms_print_error(head, "dup2", -1);
 	if (ptr->fdout == -1)
+	{
+		ms_print_error(head, "dup", -1);
 		return (2);
+	}
 	return (0);
 }
 
-int	ms_close_redir(t_split *ptr)
+int	ms_close_redir(t_list **head, t_split *ptr)
 {
 	int	err;
 
@@ -68,18 +76,21 @@ int	ms_close_redir(t_split *ptr)
 		close(ptr->fdout);
 	}
 	if (err == -1)
+	{
+		ms_print_error(head, "dup2", -1);
 		return (3);
+	}
 	return (0);
 }
 
-int	ms_redirect(t_split *content)
+int	ms_redirect(t_list **head, t_split *content)
 {
 	int	err;
 
 	err = 0;
 	if (content->redi)
-		err = handle_input(content);
+		err = handle_input(head, content);
 	if (content->redo || content->appo)
-		err = err | handle_output(content);
+		err = err | handle_output(head, content);
 	return (err);
 }
