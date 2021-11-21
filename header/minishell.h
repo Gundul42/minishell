@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 11:13:18 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 13:26:41 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int		init_pipes(t_list **lsthead);
 int		ms_check_and_open(t_split *ptr);
 int		ms_check_and_close(t_split *ptr);
 int		chk_builtin(t_split *data, int len);
+int		ms_print_error(const char *str, int nbr);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);

@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 11:02:19 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/21 13:28:53 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ms_run_prog(t_list **head, t_split *data)
 			pipe_exec(name, head, data);
 	}
 	else
-		printf("%s: command not found\n", data->tokens[0]);
+		status = ms_print_error(data->tokens[0], 127);
 	waitpid(pid, &status, 0);
 	free(name);
 	name = ft_itoa(status);
