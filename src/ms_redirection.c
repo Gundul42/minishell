@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:57:50 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 17:32:14 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/22 17:13:38 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	ms_redirect(t_list **head, t_split *content)
 	err = 0;
 	if (content->redi)
 		err = handle_input(head, content);
+	if (content->appi)
+		here_doc_input(head, content);
 	if (content->redo || content->appo)
 		err = err | handle_output(head, content);
 	return (err);

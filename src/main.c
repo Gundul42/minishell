@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/21 11:15:10 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/22 17:54:03 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,33 @@ void	ms_free_env(t_list **head, int flag)
 	free(head);
 }
 
-// Greeting shell during startup
+void	ms_debug(t_list **head)
+{
+	t_split	*ctt;
+	t_list *run;
+
+	run = *head;
+	while (run)
+	{
+		ctt = (t_split *)(run->content);
+		printf("Iname	:%s\n", ctt->iname);
+		printf("Oname	:%s\n", ctt->oname);
+		printf("err	:%d\n",	ctt->err);
+		printf("redi	:%d\n", ctt->redi);
+		printf("redo	:%d\n", ctt->redo);
+		printf("appi	:%d\n", ctt->appi);
+		printf("appo	:%d\n", ctt->appo);
+		printf("fdout	:%d\n", ctt->fdout);
+		printf("fdin	:%d\n", ctt->fdin);
+		printf("pcpyin	:%d\n", ctt->pcpyin);
+		printf("pcpyout	:%d\n", ctt->pcpyout);
+		printf("piped	:%d\n", ctt->piped);
+		printf("pipenbr	:%d\n", ctt->pipenbr);
+		printf("pipefd	:%p\n", ctt->pipefd);
+		run = run->next;
+	}
+}
+
 void	ms_init_shell(t_list **head, t_list **lsthead)
 {
 	char	*input;
@@ -57,6 +83,7 @@ void	ms_init_shell(t_list **head, t_list **lsthead)
 			add_history(input);
 		scan_input(input, head, lsthead);
 		ms_read_arguments(lsthead);
+		/*ms_debug(lsthead);*/
 		err = ms_execute(head, lsthead);
 	}
 }
