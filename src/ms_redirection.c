@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:57:50 by graja             #+#    #+#             */
-/*   Updated: 2021/11/22 17:13:38 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/24 16:22:12 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	handle_output(t_list **head, t_split *ptr)
 	return (0);
 }
 
-int	ms_close_redir(t_list **head, t_split *ptr)
+int	ms_close_redir(t_split *ptr)
 {
 	int	err;
 
@@ -75,12 +75,12 @@ int	ms_close_redir(t_list **head, t_split *ptr)
 		err = err | dup2(ptr->fdout, STDOUT_FILENO);
 		close(ptr->fdout);
 	}
-	if (err == -1)
+	if (ptr->fdhere > 0)
 	{
-		ms_print_error(head, "dup2", -1);
-		return (3);
+		err = err | dup2(ptr->fdhere, STDIN_FILENO);
+		close(ptr->fdhere);
 	}
-	return (0);
+	return (err);
 }
 
 int	ms_redirect(t_list **head, t_split *content)

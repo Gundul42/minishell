@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:56:51 by graja             #+#    #+#             */
-/*   Updated: 2021/11/22 17:49:19 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/24 15:56:00 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	get_and_write_input(t_list **head, t_split *ctt, int tmp_fd)
 {
 	char	*input;
 
-	/*	signal(SIGINT, interrupt_here_document);*/
 	while (head)
 	{
 		input = readline("> ");
@@ -46,7 +45,7 @@ void	get_and_write_input(t_list **head, t_split *ctt, int tmp_fd)
 }
 
 static
-void	restores_stdin_and_closes()
+void	restores_stdin_and_closes(void)
 {
 	int		tmp_fd;
 
@@ -59,28 +58,22 @@ void	restores_stdin_and_closes()
 void	here_doc_input(t_list **head, t_split *ctt)
 {
 	int		tmp_fd;
-	int		pipefd_out;
 	int		pid;
 	int		status;
 
 	tmp_fd = create_temporary_file();
+	ctt->fdhere = dup(STDIN_FILENO);
 	if (tmp_fd == -1)
 		return ;
-	pipefd_out = dup(STDOUT_FILENO);
-	if (ctt->pipenbr > 1)
-		dup2(ctt->pipefd[ctt->pipenbr + 1], STDOUT_FILENO);
 	signal(SIGINT, SIG_IGN);
 	pid = fork();
 	if (pid == 0)
-		get_and_write_input(head, ctt, tmp_fd);
-	waitpid(pid, &status, 0);
-	//that's for when I use cntl+d and stop the << 
-	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
 	{
+		get_and_write_input(head, ctt, tmp_fd);
 		close(tmp_fd);
 	}
+	waitpid(pid, &status, 0);
 	restores_stdin_and_closes();
-	dup2(pipefd_out, STDOUT_FILENO);
-	close(pipefd_out);
+	close(tmp_fd);
 }
 
