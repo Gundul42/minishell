@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 14:07:08 by graja             #+#    #+#             */
-/*   Updated: 2021/11/24 13:48:02 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/24 14:27:14 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	pipe_exec(char *name, t_list **head, t_split *data)
 		in = data->pipenbr * 2;
 		if (!data->redo && !data->appo && data->pipenbr != data->piped)
 			dup2(data->pipefd[in + 1], STDOUT_FILENO);
-		if (!data->redi && data->pipenbr > 0)
+		if (!data->redi && !data->appi && data->pipenbr > 0)
 			dup2(data->pipefd[in - 2], STDIN_FILENO);
 		execve(name, get_argv(data, name), ms_exportenv(head));
 		close_pipes(data);
