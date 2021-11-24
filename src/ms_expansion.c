@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:48:10 by graja             #+#    #+#             */
-/*   Updated: 2021/11/17 11:25:08 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/24 17:24:32 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char	*exp_make(char *old, char *insert, int entry, int exit)
 	return (new);
 }
 
-static
 void	exp_var(char **matrix, int i, t_list **head)
 {
 	int		entry;

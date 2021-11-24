@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:56:51 by graja             #+#    #+#             */
-/*   Updated: 2021/11/24 15:56:00 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/24 17:23:51 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	get_and_write_input(t_list **head, t_split *ctt, int tmp_fd)
 			exit(0);
 		}
 		if (ft_strncmp(input, ctt->iname, ft_strlen(ctt->iname)))
+		{
+			exp_var(&input, 0, head);
 			ft_putendl_fd(input, tmp_fd);
+		}
 		else
 		{
 			close(tmp_fd);
