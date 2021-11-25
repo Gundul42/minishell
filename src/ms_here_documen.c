@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:56:51 by graja             #+#    #+#             */
-/*   Updated: 2021/11/25 08:51:49 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/25 14:13:20 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	expand_here(char *str)
 		}
 		if (found && *str && (ft_isalnum(*str) || *str == '?'))
 			return (1);
-		str++;
+		if (*str)
+			str++;
 	}
 	return (0);
 }
