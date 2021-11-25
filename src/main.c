@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/22 17:54:03 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/25 15:39:48 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	ms_init_shell(t_list **head, t_list **lsthead)
 			add_history(input);
 		scan_input(input, head, lsthead);
 		ms_read_arguments(lsthead);
-		/*ms_debug(lsthead);*/
 		err = ms_execute(head, lsthead);
 	}
 }
@@ -100,6 +99,7 @@ int	main(void)
 		return (1);
 	*ehead = NULL;
 	*lsthead = NULL;
+	ms_welcome();
 	ms_init_env(ehead, environ);
 	ms_init_shell(ehead, lsthead);
 	ms_free_env(ehead, 0);

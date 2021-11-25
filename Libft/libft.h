@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 13:08:37 by graja             #+#    #+#             */
-/*   Updated: 2021/09/16 17:49:30 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/25 15:32:53 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include "gnl.h"
 
 typedef struct s_list
 {
