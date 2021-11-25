@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:48:10 by graja             #+#    #+#             */
-/*   Updated: 2021/11/24 17:24:32 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/25 08:53:43 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exp_findexit(char *str)
 	int	n;
 
 	n = 0;
-	if (*str == '?')
+	if (*str && *str == '?')
 		return (1);
 	while (*str && ft_isalnum(*str))
 	{

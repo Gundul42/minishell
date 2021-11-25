@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:56:51 by graja             #+#    #+#             */
-/*   Updated: 2021/11/24 17:23:51 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/25 08:51:49 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@ static
 int	create_temporary_file(void)
 {
 	return (open(".tmp_hdocu", O_WRONLY | O_CREAT | O_TRUNC, 0600));
+}
+
+static
+int	expand_here(char *str)
+{
+	int	found;
+
+	while (*str)
+	{
+		found = 0;
+		while (*str && *str == '$')
+		{
+			found = 1;
+			str++;
+		}
+		if (found && *str && (ft_isalnum(*str) || *str == '?'))
+			return (1);
+		str++;
+	}
+	return (0);
 }
 
 static
@@ -31,9 +51,10 @@ void	get_and_write_input(t_list **head, t_split *ctt, int tmp_fd)
 			close(tmp_fd);
 			exit(0);
 		}
-		if (ft_strncmp(input, ctt->iname, ft_strlen(ctt->iname)))
+		if (ft_strncmp(input, ctt->iname, ft_strlen(input)))
 		{
-			exp_var(&input, 0, head);
+			while (expand_here(input))
+				exp_var(&input, 0, head);
 			ft_putendl_fd(input, tmp_fd);
 		}
 		else
