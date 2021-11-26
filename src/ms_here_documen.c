@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:56:51 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 07:50:22 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 09:07:47 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ void	get_and_write_input(t_list **head, t_split *ctt, int tmp_fd)
 		input = readline("> ");
 		if (!input)
 			ms_exit_here(tmp_fd, ctt->iname);
-		if (!ft_strlen(input) || ft_strncmp(input, ctt->iname, 
-					ft_strlen(input)))
+		if (ft_strncmp(input, ctt->iname, ft_strlen(input) + 1))
 		{
 			while (expand_here(input))
 				exp_var(&input, 0, head);
