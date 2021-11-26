@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:38:30 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/26 17:33:03 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:02:10 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	display_prompt(int num)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-/*	g_minishell.error_status = 130;*/
 }
 
 static
@@ -51,9 +50,8 @@ void	define_input_signals(void)
 void	interrupt_here_document(int signal)
 {
 	(void)signal;
-/*	g_minishell.error_status = 130;*/
 	write(1, "\n", 1);
-	exit(130);
+	exit(errno);
 }
 
 void	ms_exit_here(int fd, char *str)
@@ -61,5 +59,5 @@ void	ms_exit_here(int fd, char *str)
 	printf("warning: here-document delimited by");
 	printf(" end-of-file (wanted \'%s\')\n", str);
 	close(fd);
-	exit(0);
+	exit(errno);
 }
