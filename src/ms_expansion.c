@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:48:10 by graja             #+#    #+#             */
-/*   Updated: 2021/11/25 08:53:43 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 17:45:41 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	exp_findentry(char *str)
 	int	n;
 
 	n = 0;
-	while (*str && chk_single(str))
+	while (*str && *(str + 1) && chk_single(str))
 	{
 		str++;
 		n++;
