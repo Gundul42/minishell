@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/25 15:25:43 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 06:45:16 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ typedef struct s_env
 	char	*value;
 }		t_env;
 
+void	ms_exit_here(int fd, char *str);
+void	interrupt_here_document(int signal);
 void	ms_welcome(void);
 void	exp_var(char **matrix, int i, t_list **head);
 void	here_doc_input(t_list **head, t_split *ctt);

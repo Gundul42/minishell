@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:38:30 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/20 14:52:59 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 06:45:01 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,20 @@ void	define_input_signals(void)
 {
 	signal(SIGINT, display_prompt);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+void	interrupt_here_document(int signal)
+{
+	(void)signal;
+/*	g_minishell.error_status = 130;*/
+	write(1, "\n", 1);
+	exit(130);
+}
+
+void	ms_exit_here(int fd, char *str)
+{
+	printf("warning: here-document delimited by");
+	printf(" end-of-file (wanted \'%s\')\n", str);
+	close(fd);
+	exit(0);
 }

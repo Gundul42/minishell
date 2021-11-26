@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:56:51 by graja             #+#    #+#             */
-/*   Updated: 2021/11/25 14:13:20 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 06:46:35 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ void	get_and_write_input(t_list **head, t_split *ctt, int tmp_fd)
 {
 	char	*input;
 
+	signal(SIGINT, interrupt_here_document);
 	while (head)
 	{
 		input = readline("> ");
 		if (!input)
-		{
-			close(tmp_fd);
-			exit(0);
-		}
+			ms_exit_here(tmp_fd, ctt->iname);
 		if (ft_strncmp(input, ctt->iname, ft_strlen(input)))
 		{
 			while (expand_here(input))
@@ -96,6 +94,11 @@ void	here_doc_input(t_list **head, t_split *ctt)
 	{
 		get_and_write_input(head, ctt, tmp_fd);
 		close(tmp_fd);
+	}
+	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+	{
+		close(tmp_fd);
+	/*	g_minishell.error_status = 130;*/
 	}
 	waitpid(pid, &status, 0);
 	restores_stdin_and_closes();
