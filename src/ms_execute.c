@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 08:05:44 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 17:30:52 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	ms_execute(t_list **head, t_list **lsthead)
 	int		err;
 
 	err = 0;
+	signal_for_blocking_cmd();
 	if (!head || !lsthead)
 		return (0);
 	if (ft_lstsize(*lsthead) > 1)

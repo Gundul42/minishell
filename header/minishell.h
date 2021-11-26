@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 07:46:28 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 17:31:14 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,6 @@ char	**ms_exportenv(t_list **head);
 char	**get_argv(t_split *data, char *name);
 char	**ms_cut_tokens(char *str, t_list **head);
 t_env	**ms_sortenv(t_list **head);
+void	signal_for_blocking_cmd(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:38:30 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/26 07:46:17 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 17:33:03 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ void	display_prompt(int num)
 	rl_on_new_line();
 	rl_redisplay();
 /*	g_minishell.error_status = 130;*/
+}
+
+static
+void	display_for_blocking_cmd(int num)
+{
+	num++;
+	write(1, "\n", 1);
+}
+
+void	signal_for_blocking_cmd(void)
+{
+	signal(SIGINT, display_for_blocking_cmd);
 }
 
 /* redirecting SIGINT to a new prompt
