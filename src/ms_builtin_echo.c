@@ -6,11 +6,26 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:46:07 by graja             #+#    #+#             */
-/*   Updated: 2021/11/20 15:48:51 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 14:28:47 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+static
+int	ms_check_echoflag(char *s)
+{
+	if (!s || *s != '-')
+		return (0);
+	s++;
+	while (*s)
+	{
+		if (*s != 'n')
+			return (0);
+		s++;
+	}
+	return (1);
+}
 
 void	ms_builtin_echo(t_split *data)
 {
@@ -19,8 +34,7 @@ void	ms_builtin_echo(t_split *data)
 
 	i = 1;
 	flag = 0;
-	if (ft_strlen(data->tokens[1]) == 2 && \
-		!ft_strncmp(data->tokens[1], "-n\0", 3))
+	while (ms_check_echoflag(data->tokens[i]))
 	{
 		flag = 1;
 		i++;
