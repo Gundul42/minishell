@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:39:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/20 15:04:33 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 16:33:48 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static
 int	run_builtin(t_split *data, t_list **head, int len)
 {
 	if (len > 3 && !data->piped && !strncmp(data->tokens[0], "exit", len))
-		return (-1);
+		exit(ft_atoi(ms_getenv(*head, "?")));/*return (-1);*/
 	else if (len > 1 && !strncmp(data->tokens[0], "cd", len))
 		ms_builtin_cd(head, data);
 	else if (len > 2 && !strncmp(data->tokens[0], "env", len))
