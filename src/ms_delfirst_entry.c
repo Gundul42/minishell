@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 09:28:56 by graja             #+#    #+#             */
-/*   Updated: 2021/11/21 11:12:48 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 10:44:31 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,15 @@ void	ms_del_cmd(void *lst)
 
 	i = 0;
 	content = (t_split *)(lst);
+	if (!content)
+		return ;
 	while (content->tokens[i])
 	{
 		free(content->tokens[i]);
 		i++;
 	}
-	free(content->tokens);
+	if (content->tokens)
+		free(content->tokens);
 	if (content->iname)
 		free(content->iname);
 	if (content->oname)

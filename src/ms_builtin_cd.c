@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:52:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 10:01:15 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 11:11:08 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static
 char	*ms_checktilde(t_list **head, char *str)
 {
 	if (!ft_strlen(str) || *str != '~' || !ms_getenv(*head, "HOME"))
-		return (str);
+		return (ft_strdup(str));
 	str++;
 	return (ft_strjoin(ms_getenv(*head, "HOME"), str));
 }
@@ -52,7 +52,8 @@ int	ms_builtin_cd(t_list **head, t_split *data)
 	{
 		new = ms_checktilde(head, data->tokens[1]);
 		err = chdir(new);
-		free(new);
+		if (new)
+			free(new);
 	}
 	if (err)
 		ms_print_error(head, data->tokens[1], -1);
