@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/25 15:39:48 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 07:21:28 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	main(void)
 	*lsthead = NULL;
 	ms_welcome();
 	ms_init_env(ehead, environ);
+	ms_putenv(ehead, "?", "0");
 	ms_init_shell(ehead, lsthead);
 	ms_free_env(ehead, 0);
 	ms_free_env(lsthead, 1);

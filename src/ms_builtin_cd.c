@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:52:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/14 10:21:01 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 07:13:38 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ms_builtin_cd(t_list **head, t_split *data)
 		err = chdir(ms_checktilde(head, data->tokens[1]));
 	if (err)
 	{
-		printf("%s: not found\n", data->tokens[1]);
+		ms_print_error(head, data->tokens[1], -1);
 		return (err);
 	}
 	err = ms_putenv(head, "OLDPWD", ms_getenv(*head, "PWD"));
