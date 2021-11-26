@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/24 16:22:53 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 08:05:44 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	ms_run_prog(t_list **head, t_split *data)
 	else
 		status = ms_print_error(head, data->tokens[0], 127);
 	waitpid(pid, &status, 0);
+	ms_print_error(head, NULL, status);
 	close_one_pipe(data);
 	free(name);
 }
