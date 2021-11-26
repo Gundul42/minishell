@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 10:16:28 by graja             #+#    #+#             */
-/*   Updated: 2021/11/20 16:07:08 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 09:04:39 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*ms_getenv(t_list *head, char *str)
 	while (head)
 	{
 		val = (t_env *)(head->content);
-		if (!strncmp(val->name, str, ft_strlen(str)))
+		if (!strncmp(val->name, str, ft_strlen(str) + 1))
 			return (val->value);
 		head = head->next;
 	}
