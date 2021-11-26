@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:25:06 by graja             #+#    #+#             */
-/*   Updated: 2021/11/10 12:57:49 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/26 08:37:30 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ms_unsetvar(t_list **head, char *str)
 	{
 		if (ms_namecmp(*current, str))
 		{
-			printf("Found %s in pos#%3d\n", str, i);
 			next = (*current)->next;
 			ft_lstdelone(*current, &ms_delentry);
 			*current = next;
