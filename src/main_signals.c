@@ -26,6 +26,18 @@ void	display_prompt(int num)
 	rl_redisplay();
 }
 
+static
+void	display_for_blocking_cmd(int num)
+{
+	num++;
+	write(1, "\n", 1);
+}
+
+void	signal_for_blocking_cmd(void)
+{
+	signal(SIGINT, display_for_blocking_cmd);
+}
+
 /* redirecting SIGINT to a new prompt
  * and cancelling SIGQUIT
  */
