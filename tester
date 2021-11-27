@@ -1,0 +1,7 @@
+total 68
+drwxrwxr-x 2 gundul42 gundul42  4096 Nov 27 11:34 Libft
+-rw-rw-r-- 1 gundul42 gundul42  1841 Nov 26 17:03 Makefile
+drwxrwxr-x 2 gundul42 gundul42  4096 Nov 26 17:03 header
+-rwxrwxr-x 1 gundul42 gundul42 49512 Nov 27 12:28 minishell
+drwxrwxr-x 2 gundul42 gundul42  4096 Nov 27 12:28 src
+-rw-r--r-- 1 gundul42 gundul42     0 Nov 27 12:28 tester

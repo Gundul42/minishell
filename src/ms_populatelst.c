@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 10:51:27 by graja             #+#    #+#             */
-/*   Updated: 2021/11/17 11:46:21 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/27 13:00:41 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	cpy_tokens(char **matrix, char **new, int i, int n)
 	if (!new)
 		return ;
 	j = 0;
-	while (j < n)
+	while (j < n && matrix[i + j])
 	{
 		if (matrix[i + j][0] == '\"')
 			new[j] = ft_strtrim(matrix[i + j], "\"");

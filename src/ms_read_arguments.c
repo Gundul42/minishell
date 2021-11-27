@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 13:59:17 by graja             #+#    #+#             */
-/*   Updated: 2021/11/13 17:52:23 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/27 12:24:08 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_token_input(t_split *content, int i)
 {
 	if (!content->tokens[i])
 		return (i);
-	if (!ft_strncmp(content->tokens[i], "<<", 2))
+	if (!ft_strncmp(content->tokens[i], "<<", 3))
 	{
 		content->appi = 1;
 		content->iname = ft_strdup(content->tokens[i + 1]);
@@ -38,7 +38,7 @@ int	check_token_input(t_split *content, int i)
 		content->tokens[i + 1] = NULL;
 		return (i + 1);
 	}
-	else if (!ft_strncmp(content->tokens[i], "<", 1))
+	else if (!ft_strncmp(content->tokens[i], "<", 2))
 	{
 		content->redi = 1;
 		content->iname = ft_strdup(content->tokens[i + 1]);
@@ -56,7 +56,7 @@ int	check_token_output(t_split *content, int i)
 {
 	if (!content->tokens[i])
 		return (i);
-	if (!ft_strncmp(content->tokens[i], ">>", 2))
+	if (!ft_strncmp(content->tokens[i], ">>", 3))
 	{
 		content->appo = 1;
 		content->oname = ft_strdup(content->tokens[i + 1]);
@@ -66,7 +66,7 @@ int	check_token_output(t_split *content, int i)
 		content->tokens[i + 1] = NULL;
 		return (i + 1);
 	}
-	else if (!ft_strncmp(content->tokens[i], ">", 1))
+	else if (!ft_strncmp(content->tokens[i], ">", 2))
 	{
 		content->redo = 1;
 		content->oname = ft_strdup(content->tokens[i + 1]);
