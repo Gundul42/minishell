@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:23:48 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 14:47:02 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/27 14:08:48 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*cuttoken(char *bgn, char *end)
 static
 void	fillmatrix(char **matrix, char *bgn, char *end, int i)
 {
-	while (matrix && *end && *end)
+	while (matrix && end && *end)
 	{
 		if (*end == 32)
 		{

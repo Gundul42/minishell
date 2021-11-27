@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 10:51:27 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 13:00:41 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/27 14:18:52 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	get_numbr_token(char **matrix, int i)
 	{
 		if (!ft_strncmp(matrix[i], "|\0", 2))
 			break ;
-		n++;
+		if (ft_strlen(matrix[i]))
+			n++;
 		i++;
 	}
 	return (n);

@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 11:53:04 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/27 14:37:45 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**get_argv(t_split *data, char *name)
 	char	**argv;
 
 	max = 0;
-	while (ft_strlen(data->tokens[max]))
+	while (data->tokens[max] != NULL)
 		max++;
 	max++;
 	argv = ft_calloc(max + 1, sizeof(char *));
@@ -27,9 +27,12 @@ char	**get_argv(t_split *data, char *name)
 		return (NULL);
 	argv[0] = ft_strdup(name);
 	i = 1;
-	while (ft_strlen(data->tokens[i]))
+	while (data->tokens[i] != NULL)
 	{
-		argv[i] = ft_strdup(data->tokens[i]);
+		if (ft_strlen(data->tokens[i]))
+			argv[i] = ft_strdup(data->tokens[i]);
+		else
+			argv[i] = ft_calloc(1, sizeof(char));
 		i++;
 	}
 	argv[i] = NULL;
