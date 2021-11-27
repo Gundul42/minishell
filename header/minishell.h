@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 15:21:24 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/27 17:09:36 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ typedef struct s_env
 	char	*value;
 }		t_env;
 
+void	ms_free_env(t_list **head, int flag);
+void	ms_exit(t_list **env, t_list **ctt);
 void	ms_exit_here(int fd, char *str);
 void	interrupt_here_document(int signal);
 void	ms_welcome(void);
 void	exp_var(char **matrix, int i, t_list **head);
 void	here_doc_input(t_list **head, t_split *ctt);
-void	ms_debug(t_list **head);
 void	define_input_signals(void);
 void	ms_del_cmd(void *lst);
 void	check_and_insert_spaces(char **line);
@@ -80,7 +81,8 @@ void	ms_delfirst_entry(t_list **head);
 void	pipe_exec(char *name, t_list **head, t_split *data);
 void	close_pipes(t_split *data);
 void	close_one_pipe(t_split *data);
-int		built_exec(t_split *data, t_list **head, int len);
+void	ms_exit_cmd(t_list **head, t_list **ctt, t_split *data);
+int		built_exec(t_split *data, t_list **head, int len, t_list **ctt);
 int		ms_add2list(t_list **ehead, char *str);
 int		ms_init_env(t_list **ehead, char **env);
 int		ms_insnewlst(t_list **head, char *name, char *val);

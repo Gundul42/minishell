@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 14:37:45 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/27 16:48:32 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	ms_run_prog(t_list **head, t_split *data)
 }
 
 static
-int	ms_builtin(t_split *data, t_list **head)
+int	ms_builtin(t_split *data, t_list **head, t_list **lsthead)
 {
 	int	len;
 	int	blt;
@@ -73,7 +73,7 @@ int	ms_builtin(t_split *data, t_list **head)
 	len = ft_strlen(data->tokens[0]);
 	blt = chk_builtin(data, len);
 	if (blt)
-		return (built_exec(data, head, len));
+		return (built_exec(data, head, len, lsthead));
 	else if (!blt && len)
 		ms_run_prog(head, data);
 	return (0);
@@ -95,7 +95,7 @@ int	ms_execute(t_list **head, t_list **lsthead)
 		content = (t_split *)((*lsthead)->content);
 		err = ms_redirect(head, content);
 		if (!err)
-			err = err | ms_builtin(content, head);
+			err = err | ms_builtin(content, head, lsthead);
 		err = err | ms_close_redir(content);
 		ms_delfirst_entry(lsthead);
 		if (!err)

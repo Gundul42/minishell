@@ -6,13 +6,12 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/26 16:28:15 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/27 16:31:57 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
-static
 void	ms_free_env(t_list **head, int flag)
 {
 	t_list	**current;
@@ -34,41 +33,12 @@ void	ms_free_env(t_list **head, int flag)
 	free(head);
 }
 
-void	ms_debug(t_list **head)
-{
-	t_split	*ctt;
-	t_list *run;
-
-	run = *head;
-	while (run)
-	{
-		ctt = (t_split *)(run->content);
-		printf("Iname	:%s\n", ctt->iname);
-		printf("Oname	:%s\n", ctt->oname);
-		printf("err	:%d\n",	ctt->err);
-		printf("redi	:%d\n", ctt->redi);
-		printf("redo	:%d\n", ctt->redo);
-		printf("appi	:%d\n", ctt->appi);
-		printf("appo	:%d\n", ctt->appo);
-		printf("fdout	:%d\n", ctt->fdout);
-		printf("fdin	:%d\n", ctt->fdin);
-		printf("pcpyin	:%d\n", ctt->pcpyin);
-		printf("pcpyout	:%d\n", ctt->pcpyout);
-		printf("piped	:%d\n", ctt->piped);
-		printf("pipenbr	:%d\n", ctt->pipenbr);
-		printf("pipefd	:%p\n", ctt->pipefd);
-		run = run->next;
-	}
-}
-
 void	ms_init_shell(t_list **head, t_list **lsthead)
 {
 	char	*input;
 	char	*prompt;
-	int		err;
 
-	err = 0;
-	while (err >= 0)
+	while (1)
 	{
 		prompt = ms_getprompt(*head);
 		define_input_signals();
@@ -76,20 +46,19 @@ void	ms_init_shell(t_list **head, t_list **lsthead)
 		if (!input)
 		{
 			free(prompt);
-			return ;
+			ms_exit(head, lsthead);
 		}
 		free(prompt);
 		if (ft_strlen(input))
 			add_history(input);
 		scan_input(input, head, lsthead);
 		ms_read_arguments(lsthead);
-		err = ms_execute(head, lsthead);
+		ms_execute(head, lsthead);
 	}
 }
 
 int	main(void)
 {
-	int			err;
 	t_list		**ehead;
 	t_list		**lsthead;
 	extern char	**environ;
@@ -104,9 +73,5 @@ int	main(void)
 	ms_init_env(ehead, environ);
 	ms_putenv(ehead, "?", "0");
 	ms_init_shell(ehead, lsthead);
-	err = ft_atoi(ms_getenv(*ehead, "?"));
-	ms_free_env(ehead, 0);
-	ms_free_env(lsthead, 1);
-	printf("EXIT: %d\n",err);
 	return (0);
 }
