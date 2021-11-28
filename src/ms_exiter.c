@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:22:38 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 17:55:43 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/28 08:53:02 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ void	ms_exit_cmd(t_list **head, t_list **ctt, t_split *data)
 	if (n > 1)
 	{
 		printf("exit: too many arguments\n");
-		ms_print_error(head, NULL, ft_atoi(data->tokens[1]));
+		ms_print_error(head, NULL, 1);
 		return ;
 	}
-	ms_print_error(head, NULL, ft_atoi(data->tokens[1]));
+	if (i > 1)
+		ms_print_error(head, NULL, ft_atoi(data->tokens[1]));
 	ms_exit(head, ctt);
 }
