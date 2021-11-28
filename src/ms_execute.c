@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/28 11:22:08 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/28 14:03:13 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void	ms_run_prog(t_list **head, t_split *data)
 		else
 		{
 			waitpid(pid, &status, 0);
-			ms_print_error(head, NULL, errno);
+			ms_print_error(head, NULL, status);
 		}
 	}
 	else
-		ms_print_error(head, "no such file or directory", 127);
+		ms_print_error(head, data->tokens[0], 127);
 	close_one_pipe(data);
 	free(name);
 }
@@ -101,8 +101,6 @@ int	ms_execute(t_list **head, t_list **lsthead)
 			err = err | ms_builtin(content, head, lsthead);
 		err = err | ms_close_redir(content);
 		ms_delfirst_entry(lsthead);
-		if (!err)
-			ms_print_error(head, NULL, errno);
 	}
 	return (err);
 }
