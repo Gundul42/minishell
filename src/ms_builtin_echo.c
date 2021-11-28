@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:46:07 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 14:28:47 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/28 09:23:21 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void	ms_builtin_echo(t_split *data)
 	flag = 0;
 	while (ms_check_echoflag(data->tokens[i]))
 	{
-		flag = 1;
+		flag++;
 		i++;
 	}
 	while (data->tokens[i])
 	{
 		if (ft_strlen(data->tokens[i]) != 0)
 		{
-			if ((!flag && i > 1) || (flag && i > 2))
+			if ((!flag && i > 1) || (flag && i > flag + 1))
 				printf(" %s", data->tokens[i]);
 			else
 				printf("%s", data->tokens[i]);
