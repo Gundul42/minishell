@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 13:59:17 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 12:24:08 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/28 12:20:06 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,62 +20,6 @@ int	get_ttl(char **str)
 	i = 0;
 	while (str[i])
 		i++;
-	return (i);
-}
-
-static
-int	check_token_input(t_split *content, int i)
-{
-	if (!content->tokens[i])
-		return (i);
-	if (!ft_strncmp(content->tokens[i], "<<", 3))
-	{
-		content->appi = 1;
-		content->iname = ft_strdup(content->tokens[i + 1]);
-		free(content->tokens[i]);
-		free(content->tokens[i + 1]);
-		content->tokens[i] = NULL;
-		content->tokens[i + 1] = NULL;
-		return (i + 1);
-	}
-	else if (!ft_strncmp(content->tokens[i], "<", 2))
-	{
-		content->redi = 1;
-		content->iname = ft_strdup(content->tokens[i + 1]);
-		free(content->tokens[i]);
-		free(content->tokens[i + 1]);
-		content->tokens[i] = NULL;
-		content->tokens[i + 1] = NULL;
-		return (i + 1);
-	}
-	return (i);
-}
-
-static
-int	check_token_output(t_split *content, int i)
-{
-	if (!content->tokens[i])
-		return (i);
-	if (!ft_strncmp(content->tokens[i], ">>", 3))
-	{
-		content->appo = 1;
-		content->oname = ft_strdup(content->tokens[i + 1]);
-		free(content->tokens[i]);
-		free(content->tokens[i + 1]);
-		content->tokens[i] = NULL;
-		content->tokens[i + 1] = NULL;
-		return (i + 1);
-	}
-	else if (!ft_strncmp(content->tokens[i], ">", 2))
-	{
-		content->redo = 1;
-		content->oname = ft_strdup(content->tokens[i + 1]);
-		free(content->tokens[i]);
-		free(content->tokens[i + 1]);
-		content->tokens[i] = NULL;
-		content->tokens[i + 1] = NULL;
-		return (i + 1);
-	}
 	return (i);
 }
 
@@ -122,8 +66,8 @@ void	ms_read_arguments(t_list **lsthead)
 		i = 0;
 		while (i < ttl)
 		{
-			i = check_token_input(content, i);
-			i = check_token_output(content, i);
+			i = ms_check_token_input(content, i);
+			i = ms_check_token_output(content, i);
 			i++;
 		}
 		sort_back(content->tokens, ttl);

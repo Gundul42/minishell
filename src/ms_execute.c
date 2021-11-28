@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 16:48:32 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/28 11:22:08 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,14 @@ void	ms_run_prog(t_list **head, t_split *data)
 		pid = fork();
 		if (!pid)
 			pipe_exec(name, head, data);
+		else
+		{
+			waitpid(pid, &status, 0);
+			ms_print_error(head, NULL, errno);
+		}
 	}
 	else
-		status = ms_print_error(head, data->tokens[0], errno);
-	waitpid(pid, &status, 0);
-	ms_print_error(head, NULL, errno);
+		ms_print_error(head, "no such file or directory", 127);
 	close_one_pipe(data);
 	free(name);
 }

@@ -6,7 +6,7 @@
 #    By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 13:23:33 by graja             #+#    #+#              #
-#    Updated: 2021/11/27 16:28:17 by graja            ###   ########.fr        #
+#    Updated: 2021/11/28 12:53:51 by graja            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRC		= src/ms_enviro.c src/main.c src/ms_prompt.c \
 		 src/ms_redirection.c src/ms_pipes.c src/ms_builtin_pipes.c \
 		 src/ms_check_builtin.c src/ms_pipeexec.c src/main_signals.c \
 		 src/ms_errors.c src/ms_here_documen.c src/welcome.c \
-		 src/ms_exiter.c
+		 src/ms_exiter.c src/ms_checktoken_input.c \
+		 src/ms_checktoken_output.c
 CC		= gcc
 FLAGS		= -Wall -Wextra -Werror -pthread
 RM		= rm -f
