@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:57:47 by graja             #+#    #+#             */
-/*   Updated: 2021/11/20 16:06:54 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:16:46 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,5 @@ void	ms_builtin_export(t_list **head, t_split *data)
 	}
 	if (i == 1)
 		ms_printexp(head);
+	ms_print_error(head, NULL, 0);
 }

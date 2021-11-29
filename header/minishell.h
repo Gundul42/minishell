@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/28 12:19:48 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:06:58 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	ms_del_cmd(void *lst);
 void	check_and_insert_spaces(char **line);
 void	ms_input_parser(char *input, t_split *data);
 void	ms_builtin_pwd(t_list **head);
-void	ms_builtin_echo(t_split *data);
+void	ms_builtin_echo(t_list **head, t_split *data);
 void	ms_builtin_export(t_list **head, t_split *data);
 void	ms_builtin_unset(t_list **head, t_split *data);
 void	ms_delentry(void *lst);

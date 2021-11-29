@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:39:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 17:11:18 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:05:45 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	run_builtin(t_split *data, t_list **head, int len, t_list **ctt)
 	else if (len > 2 && !strncmp(data->tokens[0], "pwd", len))
 		ms_builtin_pwd(head);
 	else if (len > 3 && !strncmp(data->tokens[0], "echo", len))
-		ms_builtin_echo(data);
+		ms_builtin_echo(head, data);
 	else if (len > 5 && !strncmp(data->tokens[0], "export", len))
 		ms_builtin_export(head, data);
 	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))

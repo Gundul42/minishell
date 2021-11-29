@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:52:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 11:11:08 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/29 12:23:27 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ int	ms_builtin_cd(t_list **head, t_split *data)
 	if (err)
 		ms_print_error(head, data->tokens[1], -1);
 	else
+	{
 		err = ms_update_dir(head);
-
+		ms_print_error(head, NULL, 0);
+	}
 	return (err);
 }
