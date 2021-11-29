@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:57:50 by graja             #+#    #+#             */
-/*   Updated: 2021/11/24 16:22:12 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/29 15:01:41 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	handle_input(t_list **head, t_split *ptr)
 	fd = open(ptr->iname, O_RDONLY, 0644);
 	if (fd == -1)
 	{
-		ms_print_error(head, ptr->oname, -1);
+		ms_print_error(head, ptr->iname, -1);
 		return (1);
 	}
 	ptr->fdin = dup(STDIN_FILENO);
@@ -90,9 +90,9 @@ int	ms_redirect(t_list **head, t_split *content)
 	err = 0;
 	if (content->redi)
 		err = handle_input(head, content);
-	if (content->appi)
+	if (!err && content->appi)
 		here_doc_input(head, content);
-	if (content->redo || content->appo)
+	if (!err && (content->redo || content->appo))
 		err = err | handle_output(head, content);
 	return (err);
 }
