@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:25:06 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 18:22:19 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/29 17:38:43 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	ms_builtin_unset(t_list **head, t_split *data)
 		else
 		{
 			printf("unset : \'%s\': not a valid", data->tokens[i]);
-		       	printf(" identifier\n");
+			printf(" identifier\n");
 			ms_print_error(head, NULL, 1);
-			break;
+			break ;
 		}
 		i++;
 	}
