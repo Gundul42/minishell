@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/27 16:31:57 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/29 14:43:54 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,12 @@ void	ms_init_shell(t_list **head, t_list **lsthead)
 			ms_exit(head, lsthead);
 		}
 		free(prompt);
-		if (ft_strlen(input))
-			add_history(input);
+		if (!ft_strlen(input))
+		{
+			free(input);
+			continue;
+		}
+		add_history(input);
 		scan_input(input, head, lsthead);
 		ms_read_arguments(lsthead);
 		ms_execute(head, lsthead);
