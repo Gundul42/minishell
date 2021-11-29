@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/28 14:03:13 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/29 17:18:49 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ char	**get_argv(t_split *data, char *name)
 }
 
 static
+char	*ms_is_path(t_list **head)
+{
+	char	*path;
+
+	path = ms_getenv(*head, "PATH");
+	if (path)
+		return (path);
+	else
+		return (ft_strdup("./"));
+}
+
+static
 void	ms_run_prog(t_list **head, t_split *data)
 {
 	char	*name;
@@ -49,7 +61,7 @@ void	ms_run_prog(t_list **head, t_split *data)
 	pid = 0;
 	status = 0;
 	name = NULL;
-	name = ms_file_exists(data->tokens[0], ms_getenv(*head, "PATH"), 0);
+	name = ms_file_exists(data->tokens[0], ms_is_path(head), 0);
 	if (name)
 	{
 		pid = fork();
