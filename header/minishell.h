@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/29 12:06:58 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/30 15:35:58 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_env
 	char	*value;
 }		t_env;
 
+void	ms_c_error(t_list **head, char *s1, char *s2, int nbr);
 void	ms_free_env(t_list **head, int flag);
 void	ms_exit(t_list **env, t_list **ctt);
 void	ms_exit_here(int fd, char *str);
