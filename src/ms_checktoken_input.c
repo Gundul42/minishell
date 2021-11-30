@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 12:01:09 by graja             #+#    #+#             */
-/*   Updated: 2021/11/28 12:18:32 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/30 12:49:22 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ void	ms_set_ctti(t_split *content, int i, int flag)
 		content->appi = 1;
 	else
 		content->redi = 1;
-	if (content->iname)
-		free(content->iname);
-	content->iname = ft_strdup(content->tokens[i + 1]);
+	if (!content->iname)
+		content->iname = ft_strdup(content->tokens[i + 1]);
 	free(content->tokens[i]);
 	free(content->tokens[i + 1]);
 	content->tokens[i] = NULL;
