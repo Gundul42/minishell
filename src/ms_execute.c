@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/30 11:18:42 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/30 13:18:30 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*ms_is_path(t_list **head)
 	if (path)
 		return (path);
 	else
-		return (ft_strdup("./"));
+		return ("./");
 }
 
 static
