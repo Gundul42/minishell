@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/29 17:18:49 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/30 11:18:42 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ void	ms_run_prog(t_list **head, t_split *data)
 		pid = fork();
 		if (!pid)
 			pipe_exec(name, head, data);
-		else
-		{
-			waitpid(pid, &status, 0);
-			ms_print_error(head, NULL, status);
-		}
 	}
 	else
 		ms_print_error(head, data->tokens[0], 127);
+	waitpid(pid, &status, 0);
+	if (status && name)
+		ms_print_error(head, NULL, errno);
+	else if (name)
+		ms_print_error(head, NULL, 0);
 	close_one_pipe(data);
 	free(name);
 }
