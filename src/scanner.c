@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 13:22:03 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 13:02:44 by graja            ###   ########.fr       */
+/*   Updated: 2021/11/30 10:40:08 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ void	scan_input(char *input, t_list **head, t_list **lsthead)
 		return ;
 	check_and_insert_spaces(&input);
 	input = cleanup(input);
+	if (!ft_strlen(input))
+	{
+		free(input);
+		return ;
+	}
 	matrix = ms_cut_tokens(input, head);
 	if (matrix)
 		ms_populate_cmdlst(matrix, lsthead);
