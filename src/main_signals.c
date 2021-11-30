@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:38:30 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/30 13:11:14 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/12/01 01:11:25 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
  * it is there solely to make
  * norminette shut up
  */
+//ctrl + C when interactive
 static
 void	display_prompt(int num)
 {	
 	num++;
+	g_status = 130;
 	write(1, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();

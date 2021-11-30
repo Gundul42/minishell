@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/30 15:35:58 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/01 01:13:48 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,12 @@ typedef struct s_env
 	char	*value;
 }		t_env;
 
-void	ms_c_error(t_list **head, char *s1, char *s2, int nbr);
+extern int	g_status;
+
+void	ms_c_error_for_glob(char s);
+void	ms_print_error_for_glob(const char *str, int nbr);
+// int		ms_print_error(t_list **head, const char *str, int nbr);
+// void	ms_c_error(t_list **head, char *s1, char *s2, int nbr);
 void	ms_free_env(t_list **head, int flag);
 void	ms_exit(t_list **env, t_list **ctt);
 void	ms_exit_here(int fd, char *str);
@@ -102,7 +107,6 @@ int		init_pipes(t_list **lsthead);
 int		ms_check_and_open(t_split *ptr);
 int		ms_check_and_close(t_split *ptr);
 int		chk_builtin(t_split *data, int len);
-int		ms_print_error(t_list **head, const char *str, int nbr);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);

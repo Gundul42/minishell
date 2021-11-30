@@ -6,11 +6,13 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/29 17:36:04 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/01 00:41:27 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+int	g_status = 0;
 
 void	ms_free_env(t_list **head, int flag)
 {

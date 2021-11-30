@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:46:07 by graja             #+#    #+#             */
-/*   Updated: 2021/11/29 12:09:21 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/01 01:03:37 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void	ms_builtin_echo(t_list **head, t_split *data)
 	}
 	if (!flag)
 		printf("\n");
-	ms_print_error(head, NULL, 0);
+	ms_print_error_for_glob(NULL, 0);
+	// ms_print_error(head, NULL, 0);
 }

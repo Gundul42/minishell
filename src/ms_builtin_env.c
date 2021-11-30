@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_env.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:09:07 by graja             #+#    #+#             */
-/*   Updated: 2021/11/29 12:31:04 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/01 01:04:08 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	ms_builtin_env(t_list **list)
 			printf("\n");
 		head = head->next;
 	}
-	ms_print_error(list, NULL, 0);
+	// ms_print_error(list, NULL, 0);
+	ms_print_error_for_glob(NULL, 0);
 	return (0);
 }
