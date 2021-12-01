@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:57:47 by graja             #+#    #+#             */
-/*   Updated: 2021/11/29 12:16:46 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/01 14:50:30 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,27 @@ char	*trimmer(char *old)
 	return (new);
 }
 
+static
+void	ms_exp_error(t_list **head, char *tok)
+{
+	char	*front;
+
+	front = ft_calloc(9 + ft_strlen(tok) + 1, sizeof(char));
+	if (!front)
+		return ;
+	ft_strlcpy(front, "export: \'", 10);
+	ft_strlcat(front, tok, 9 + ft_strlen(tok) + 1);
+	ms_c_error(head, front, "\' is not a valid identifier", 1);
+	free(front);
+}
+
 void	ms_builtin_export(t_list **head, t_split *data)
 {
 	char	**new;
 	int		i;
 
 	i = 1;
+	ms_print_error(head, NULL, 0);
 	while (ft_strlen(data->tokens[i]))
 	{
 		if (ms_hasequal(data->tokens[i]))
@@ -84,9 +99,10 @@ void	ms_builtin_export(t_list **head, t_split *data)
 				free(new);
 			}
 		}
+		else
+			ms_exp_error(head, data->tokens[i]);
 		i++;
 	}
 	if (i == 1)
 		ms_printexp(head);
-	ms_print_error(head, NULL, 0);
 }
