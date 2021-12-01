@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 13:22:52 by graja             #+#    #+#             */
-/*   Updated: 2021/11/30 15:35:45 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/01 12:03:54 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,12 @@ void	ms_c_error(t_list **head, char *s1, char *s2, int nbr)
 	ms_putenv(head, "?", msg);
 	free(msg);
 }
+
+void	ms_error_signals(t_list **head)
+{
+	if (g_ms_sigerr < 0)
+		return ;
+	ms_putenv(head, "?", ft_itoa(g_ms_sigerr));
+	g_ms_sigerr = -1;
+}
+

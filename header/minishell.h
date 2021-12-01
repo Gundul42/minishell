@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/30 15:35:58 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/01 11:38:14 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ typedef struct s_env
 	char	*value;
 }		t_env;
 
+int	g_ms_sigerr;
+
+void	ms_error_signals(t_list **head);
 void	ms_c_error(t_list **head, char *s1, char *s2, int nbr);
 void	ms_free_env(t_list **head, int flag);
 void	ms_exit(t_list **env, t_list **ctt);
@@ -64,7 +67,7 @@ void	interrupt_here_document(int signal);
 void	ms_welcome(void);
 void	exp_var(char **matrix, int i, t_list **head);
 void	here_doc_input(t_list **head, t_split *ctt);
-void	define_input_signals(void);
+void	define_input_signals(t_list **head);
 void	ms_del_cmd(void *lst);
 void	check_and_insert_spaces(char **line);
 void	ms_input_parser(char *input, t_split *data);
@@ -83,6 +86,7 @@ void	pipe_exec(char *name, t_list **head, t_split *data);
 void	close_pipes(t_split *data);
 void	close_one_pipe(t_split *data);
 void	ms_exit_cmd(t_list **head, t_list **ctt, t_split *data);
+void	signal_for_blocking_cmd(void);
 int		ms_check_token_output(t_split *content, int i);
 int		ms_check_token_input(t_split *content, int i);
 int		built_exec(t_split *data, t_list **head, int len, t_list **ctt);
@@ -111,6 +115,5 @@ char	**ms_exportenv(t_list **head);
 char	**get_argv(t_split *data, char *name);
 char	**ms_cut_tokens(char *str, t_list **head);
 t_env	**ms_sortenv(t_list **head);
-void	signal_for_blocking_cmd(void);
 
 #endif

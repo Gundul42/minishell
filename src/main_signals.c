@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:38:30 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/30 13:11:14 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/12/01 12:02:35 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 /* 'int num' does not make sense
  * it is there solely to make
  * norminette shut up
- */
+ * write to STDERR to avoid writing into buffer first */
 static
 void	display_prompt(int num)
 {	
 	num++;
-	write(1, "\n", 1);
+	g_ms_sigerr = 130;
+	write(STDERR_FILENO, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
@@ -29,10 +30,11 @@ void	display_prompt(int num)
 /* redirecting SIGINT to a new prompt
  * and cancelling SIGQUIT
  */
-void	define_input_signals(void)
+void	define_input_signals(t_list **head)
 {
 	signal(SIGINT, display_prompt);
 	signal(SIGQUIT, SIG_IGN);
+	ms_error_signals(head);
 }
 
 void	interrupt_here_document(int signal)

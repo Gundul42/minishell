@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 13:10:50 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/30 13:11:19 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/12/01 11:21:36 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ static
 void	display_for_blocking_cmd(int num)
 {
 	num++;
-	write(1, "\n", 1);
+	g_ms_sigerr = 130;
+	write(STDERR_FILENO, "\n", 1);
 }
 
 static
 void	quit_process(int num)
 {
 	num++;
-	printf("Quit (core dumped)\n");
+	g_ms_sigerr = 131;
+	ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
 }
 
 void	signal_for_blocking_cmd(void)

@@ -6,11 +6,15 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/29 17:36:04 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/01 11:57:11 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+/* global var to hold error nbr of signals
+ * no other solution found than using globals */
+int	g_ms_sigerr = -1;
 
 void	ms_free_env(t_list **head, int flag)
 {
@@ -41,7 +45,7 @@ void	ms_init_shell(t_list **head, t_list **lsthead)
 	while (1)
 	{
 		prompt = ms_getprompt(*head);
-		define_input_signals();
+		define_input_signals(head);
 		input = readline(prompt);
 		if (!input)
 		{
