@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:48:10 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 17:45:41 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/03 11:46:06 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	exp_var(char **matrix, int i, t_list **head)
 	int		exit;
 	char	*var;
 	char	*new;
+	char	*tmp;
 
 	entry = exp_findentry(matrix[i]);
 	exit = exp_findexit(matrix[i] + entry + 1);
@@ -82,7 +83,10 @@ void	exp_var(char **matrix, int i, t_list **head)
 		free(var);
 		return ;
 	}
-	new = exp_make(matrix[i], ms_getenv(*head, var), entry, exit);
+	tmp = ms_getenv(*head, var);
+	if (!tmp)
+		tmp = "";
+	new = exp_make(matrix[i], tmp, entry, exit);
 	free(var);
 	free(matrix[i]);
 	matrix[i] = new;
