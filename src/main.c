@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/12/03 15:06:03 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/03 15:37:59 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ms_init_shell(t_list **head, t_list **lsthead, char *input, char *prt)
 		if (!ms_read_arguments(lsthead, 0, 0))
 			ms_execute(head, lsthead);
 		else
-			ms_c_error(head, "syntax error", "", 2);
+			ms_c_error(head, "syntax ", " error", 2);
 	}
 }
 

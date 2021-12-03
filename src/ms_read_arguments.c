@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 13:59:17 by graja             #+#    #+#             */
-/*   Updated: 2021/12/03 14:55:48 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/03 15:40:23 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ms_syntax_error(t_list **head)
 		*current = next;
 	}
 	*head = NULL;
+	ms_delfirst_entry(head);
 }
 
 static
