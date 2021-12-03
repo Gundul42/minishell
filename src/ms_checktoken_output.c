@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 12:09:23 by graja             #+#    #+#             */
-/*   Updated: 2021/12/03 13:43:14 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/03 14:51:05 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static
 int	ms_set_ctto(t_split *content, int i, int flag)
 {
 	if (!content->tokens[i + 1])
-		return (-666) ;
+		return (-666);
 	if (flag)
 		content->appo = 1;
 	else

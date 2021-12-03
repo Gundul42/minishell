@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 13:59:17 by graja             #+#    #+#             */
-/*   Updated: 2021/12/03 14:17:37 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/03 14:55:48 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static
 void	ms_syntax_error(t_list **head)
 {
-	t_list  **current;
-	t_list  *next;
+	t_list	**current;
+	t_list	*next;
 
 	current = head;
 	while (*current)
@@ -67,12 +67,10 @@ void	sort_back(char **arr, int ttl)
 	}
 }
 
-int	ms_read_arguments(t_list **lsthead)
+int	ms_read_arguments(t_list **lsthead, int i, int ttl)
 {
 	t_list	*lst;
 	t_split	*content;
-	int		i;
-	int		ttl;
 
 	lst = *lsthead;
 	while (lst)
