@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/11/30 15:35:58 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/03 14:09:41 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ void	scan_input(char *input, t_list **head, t_list **lsthead);
 void	expand_envvars(char **matrix, t_list **head);
 void	ms_populate_cmdlst(char **matrix, t_list **lsthead);
 void	ms_init_shell(t_list **head, t_list **lsthead);
-void	ms_read_arguments(t_list **lsthead);
 void	ms_delfirst_entry(t_list **head);
 void	pipe_exec(char *name, t_list **head, t_split *data);
 void	close_pipes(t_split *data);
 void	close_one_pipe(t_split *data);
 void	ms_exit_cmd(t_list **head, t_list **ctt, t_split *data);
+int		ms_read_arguments(t_list **lsthead);
 int		ms_check_token_output(t_split *content, int i);
 int		ms_check_token_input(t_split *content, int i);
 int		built_exec(t_split *data, t_list **head, int len, t_list **ctt);

@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/29 17:36:04 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/03 14:20:28 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ void	ms_init_shell(t_list **head, t_list **lsthead)
 		}
 		add_history(input);
 		scan_input(input, head, lsthead);
-		ms_read_arguments(lsthead);
-		ms_execute(head, lsthead);
+		if (!ms_read_arguments(lsthead))
+			ms_execute(head, lsthead);
+		else
+			ms_c_error(head, "syntax error", "", 2);
 	}
 }
 
