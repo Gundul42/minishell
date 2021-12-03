@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:46:07 by graja             #+#    #+#             */
-/*   Updated: 2021/11/29 12:09:21 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/03 10:56:36 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ int	ms_check_echoflag(char *s)
 	return (1);
 }
 
+static
+void	echo_print(char *s, int flag)
+{
+	if (!flag)
+		write(STDOUT_FILENO, s, ft_strlen(s));
+	else
+	{
+		write(STDOUT_FILENO, " ", 1);
+		write(STDOUT_FILENO, s, ft_strlen(s));
+	}
+}
+
 void	ms_builtin_echo(t_list **head, t_split *data)
 {
 	int	i;
@@ -44,9 +56,9 @@ void	ms_builtin_echo(t_list **head, t_split *data)
 		if (ft_strlen(data->tokens[i]) != 0)
 		{
 			if ((!flag && i > 1) || (flag && i > flag + 1))
-				printf(" %s", data->tokens[i]);
+				echo_print(data->tokens[i], 1);
 			else
-				printf("%s", data->tokens[i]);
+				echo_print(data->tokens[i], 0);
 		}
 		i++;
 	}
