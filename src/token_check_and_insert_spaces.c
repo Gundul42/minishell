@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:39:54 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/11/10 13:26:14 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/04 12:43:27 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*create_new_line(char *line, char *current,
 	return (new_line);
 }
 
-static char	*insert_spaces(char **line, char *current, char *line_initial)
+static
+char	*insert_spaces(char **line, char *current, char *line_initial)
 {
 	char	*new_line;
 	int		operator_size;
@@ -59,7 +60,8 @@ static char	*insert_spaces(char **line, char *current, char *line_initial)
 	return (new_line + offset + operator_size + 1);
 }
 
-static int	is_operator(char *value)
+static
+int	is_operator(char *value)
 {
 	if (!(ft_strncmp(value, "|", 1)))
 		return (1);

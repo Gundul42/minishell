@@ -6,7 +6,7 @@
 #    By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/19 13:23:33 by graja             #+#    #+#              #
-#    Updated: 2021/11/30 13:11:52 by dmylonas         ###   ########.fr        #
+#    Updated: 2021/12/04 12:33:45 by dmylonas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC		= src/ms_enviro.c src/main.c src/ms_prompt.c \
 		 src/ms_errors.c src/ms_here_documen.c src/welcome.c \
 		 src/ms_exiter.c src/ms_checktoken_input.c \
 		 src/ms_checktoken_output.c \
-		 src/ms_exit_here.c src/main_signals_extra.c
+		 src/ms_exit_here.c src/main_signals_extra.c 
 CC		= gcc
 FLAGS		= -Wall -Wextra -Werror -pthread
 RM		= rm -f
