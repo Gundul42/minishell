@@ -6,7 +6,7 @@
 /*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 17:23:48 by graja             #+#    #+#             */
-/*   Updated: 2021/11/27 14:08:48 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/05 08:37:41 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,15 @@ char	*cuttoken(char *bgn, char *end)
 	char	*token;
 
 	len = (int)(end - bgn);
+	if (!len)
+		return (NULL);
 	token = ft_calloc(len + 1, sizeof(char));
-	if (!len || !token)
+	if (!token)
 		return (token);
 	token = memcpy(token, bgn, len);
 	return (token);
 }
 
-/* add comments handling by simply adding 
- *             || *end == '#'
- * to first while loop. Subject did not explicitely
- * asked for comments
-*/
 static
 void	fillmatrix(char **matrix, char *bgn, char *end, int i)
 {
@@ -69,7 +66,7 @@ void	fillmatrix(char **matrix, char *bgn, char *end, int i)
 			bgn = end;
 			i++;
 		}
-		else
+		else if (*end)
 			end++;
 	}
 	matrix[i] = cuttoken(bgn, end);
