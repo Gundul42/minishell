@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_export.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 13:57:47 by graja             #+#    #+#             */
-/*   Updated: 2021/12/01 14:50:30 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/05 11:11:14 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*trimmer(char *old)
 }
 
 static
-void	ms_exp_error(t_list **head, char *tok)
+void	ms_exp_error(char *tok)
 {
 	char	*front;
 
@@ -74,7 +74,7 @@ void	ms_exp_error(t_list **head, char *tok)
 		return ;
 	ft_strlcpy(front, "export: \'", 10);
 	ft_strlcat(front, tok, 9 + ft_strlen(tok) + 1);
-	ms_c_error(head, front, "\' is not a valid identifier", 1);
+	ms_c_error_for_glob(front, "\' is not a valid identifier", 1);
 	free(front);
 }
 
@@ -84,7 +84,7 @@ void	ms_builtin_export(t_list **head, t_split *data)
 	int		i;
 
 	i = 1;
-	ms_print_error(head, NULL, 0);
+	ms_print_error_for_glob(NULL, 0);
 	while (ft_strlen(data->tokens[i]))
 	{
 		if (ms_hasequal(data->tokens[i]))
@@ -100,7 +100,7 @@ void	ms_builtin_export(t_list **head, t_split *data)
 			}
 		}
 		else
-			ms_exp_error(head, data->tokens[i]);
+			ms_exp_error(data->tokens[i]);
 		i++;
 	}
 	if (i == 1)

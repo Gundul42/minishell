@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_pipes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:39:00 by graja             #+#    #+#             */
-/*   Updated: 2021/11/29 17:37:00 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/05 11:13:17 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	run_builtin(t_split *data, t_list **head, int len, t_list **ctt)
 	else if (len > 2 && !strncmp(data->tokens[0], "pwd", len))
 		ms_builtin_pwd(head);
 	else if (len > 3 && !strncmp(data->tokens[0], "echo", len))
-		ms_builtin_echo(head, data);
+		ms_builtin_echo(data);
 	else if (len > 5 && !strncmp(data->tokens[0], "export", len))
 		ms_builtin_export(head, data);
 	else if (len > 4 && !strncmp(data->tokens[0], "unset", len))

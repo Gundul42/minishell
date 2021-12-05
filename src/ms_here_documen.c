@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_here_documen.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
+/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 11:56:51 by graja             #+#    #+#             */
-/*   Updated: 2021/11/26 16:12:21 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/05 12:10:58 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	here_doc_input(t_list **head, t_split *ctt)
 		close(tmp_fd);
 	}
 	waitpid(pid, &status, 0);
-	ms_print_error(head, NULL, 0);
+	ms_print_error_for_glob(NULL, 0);
 	restores_stdin_and_closes();
 	close(tmp_fd);
 }

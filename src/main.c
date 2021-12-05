@@ -6,11 +6,13 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 12:26:28 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/12/03 15:37:59 by graja            ###   ########.fr       */
+/*   Updated: 2021/12/05 11:15:54 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
+
+int	g_status = 0;
 
 static
 void	ms_init_shell(t_list **head, t_list **lsthead, char *input, char *prt)
@@ -36,7 +38,7 @@ void	ms_init_shell(t_list **head, t_list **lsthead, char *input, char *prt)
 		if (!ms_read_arguments(lsthead, 0, 0))
 			ms_execute(head, lsthead);
 		else
-			ms_c_error(head, "syntax ", " error", 2);
+			ms_c_error_for_glob("syntax ", " error", 2);
 	}
 }
 
@@ -75,7 +77,6 @@ int	main(void)
 	*lsthead = NULL;
 	ms_welcome();
 	ms_init_env(ehead, environ);
-	ms_putenv(ehead, "?", "0");
 	ms_init_shell(ehead, lsthead, NULL, NULL);
 	return (0);
 }
