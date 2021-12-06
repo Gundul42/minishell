@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_unset.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 17:25:06 by graja             #+#    #+#             */
-/*   Updated: 2021/12/05 10:58:34 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/11/29 17:38:43 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ms_builtin_unset(t_list **head, t_split *data)
 		{
 			printf("unset : \'%s\': not a valid", data->tokens[i]);
 			printf(" identifier\n");
-			ms_print_error_for_glob(NULL, 1);
+			ms_print_error(head, NULL, 1);
 			break ;
 		}
 		i++;

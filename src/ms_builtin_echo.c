@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_echo.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 12:46:07 by graja             #+#    #+#             */
-/*   Updated: 2021/12/05 11:10:07 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:42:59 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	echo_print(char *s, int flag)
 	}
 }
 
-void	ms_builtin_echo(t_split *data)
+void	ms_builtin_echo(t_list **head, t_split *data)
 {
 	int	i;
 	int	flag;
@@ -64,5 +64,5 @@ void	ms_builtin_echo(t_split *data)
 	}
 	if (!flag)
 		printf("\n");
-	ms_print_error_for_glob(NULL, 0);
+	ms_print_error(head, NULL, 0);
 }

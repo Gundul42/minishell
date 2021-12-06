@@ -3,39 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ms_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 14:57:50 by graja             #+#    #+#             */
-/*   Updated: 2021/12/05 11:11:49 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:01:41 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/minishell.h"
 
 static
-int	handle_input(t_split *ptr)
+int	handle_input(t_list **head, t_split *ptr)
 {
 	int	fd;
 
 	fd = open(ptr->iname, O_RDONLY, 0644);
 	if (fd == -1)
 	{
-		ms_print_error_for_glob(ptr->iname, -1);
+		ms_print_error(head, ptr->iname, -1);
 		return (1);
 	}
 	ptr->fdin = dup(STDIN_FILENO);
 	if (dup2(fd, STDIN_FILENO) == -1)
-		ms_print_error_for_glob("dup2", -1);
+		ms_print_error(head, "dup2", -1);
 	if (ptr->fdin == -1)
 	{
-		ms_print_error_for_glob("dup", -1);
+		ms_print_error(head, "dup", -1);
 		return (2);
 	}
 	return (0);
 }
 
 static
-int	handle_output(t_split *ptr)
+int	handle_output(t_list **head, t_split *ptr)
 {
 	int	fd;
 
@@ -46,15 +46,15 @@ int	handle_output(t_split *ptr)
 		fd = open(ptr->oname, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
-		ms_print_error_for_glob(ptr->oname, -1);
+		ms_print_error(head, ptr->oname, -1);
 		return (1);
 	}
 	ptr->fdout = dup(STDOUT_FILENO);
 	if (dup2(fd, STDOUT_FILENO) == -1)
-		ms_print_error_for_glob("dup2", -1);
+		ms_print_error(head, "dup2", -1);
 	if (ptr->fdout == -1)
 	{
-		ms_print_error_for_glob("dup", -1);
+		ms_print_error(head, "dup", -1);
 		return (2);
 	}
 	return (0);
@@ -89,10 +89,10 @@ int	ms_redirect(t_list **head, t_split *content)
 
 	err = 0;
 	if (content->redi)
-		err = handle_input(content);
+		err = handle_input(head, content);
 	if (!err && content->appi)
 		here_doc_input(head, content);
 	if (!err && (content->redo || content->appo))
-		err = err | handle_output(content);
+		err = err | handle_output(head, content);
 	return (err);
 }

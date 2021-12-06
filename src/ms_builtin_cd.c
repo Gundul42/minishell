@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_builtin_cd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 12:52:00 by graja             #+#    #+#             */
-/*   Updated: 2021/12/05 10:57:09 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/11/29 17:33:21 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ms_update_dir(t_list **head)
 	char	*new;
 
 	err = 0;
-	ms_print_error_for_glob(NULL, 0);
+	ms_print_error(head, NULL, 0);
 	err = ms_putenv(head, "OLDPWD", ms_getenv(*head, "PWD"));
 	if (!err)
 	{
@@ -56,11 +56,11 @@ int	ms_builtin_cd(t_list **head, t_split *data)
 			free(new);
 	}
 	if (err)
-		ms_print_error_for_glob(data->tokens[1], -1);
+		ms_print_error(head, data->tokens[1], -1);
 	else
 	{
 		err = ms_update_dir(head);
-		ms_print_error_for_glob(NULL, 0);
+		ms_print_error(head, NULL, 0);
 	}
 	return (err);
 }

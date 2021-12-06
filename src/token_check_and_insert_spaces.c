@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 00:39:54 by dmylonas          #+#    #+#             */
-/*   Updated: 2021/12/05 10:47:10 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/12/04 14:09:42 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*create_new_line(char *line, char *current,
 		return (NULL);
 	help[0] = ft_substr(line, 0, offset);
 	help[1] = ft_substr(current, 0, operator_size);
-	help[2] = ft_strdup(current + operator_size);
+	help[2] = strdup(current + operator_size);
 	help[3] = ft_strjoin(help[0], " ");
 	help[4] = ft_strjoin(help[3], help[1]);
 	help[5] = ft_strjoin(help[4], " ");

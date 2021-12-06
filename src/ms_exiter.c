@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_exiter.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*   By: graja <graja@student.42wolfsburg.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:22:38 by graja             #+#    #+#             */
-/*   Updated: 2021/12/05 11:49:20 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/11/28 08:53:02 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ms_exit(t_list **env, t_list **ctt)
 {
 	int	nbr;
 
-	nbr = g_status;
+	nbr = ft_atoi(ms_getenv(*env, "?"));
 	if (env)
 		ms_free_env(env, 0);
 	if (ctt)
@@ -40,10 +40,10 @@ void	ms_exit_cmd(t_list **head, t_list **ctt, t_split *data)
 	if (n > 1)
 	{
 		printf("exit: too many arguments\n");
-		ms_print_error_for_glob(NULL, 1);
+		ms_print_error(head, NULL, 1);
 		return ;
 	}
 	if (i > 1)
-		ms_print_error_for_glob(NULL, ft_atoi(data->tokens[1]));
+		ms_print_error(head, NULL, ft_atoi(data->tokens[1]));
 	ms_exit(head, ctt);
 }

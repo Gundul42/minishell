@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 18:07:32 by graja             #+#    #+#             */
-/*   Updated: 2021/12/05 12:00:19 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/12/04 12:33:30 by dmylonas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # include <sys/ioctl.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-
-extern int	g_status;
 
 typedef struct s_split
 {
@@ -58,12 +56,7 @@ typedef struct s_env
 	char	*value;
 }		t_env;
 
-void	ms_print_error_for_glob(const char *str, int nbr);
-void	ms_c_error_for_glob(char *s1, char *s2, int nbr);
-char	*exp_var_extra(char *var, char *matrix, t_list **head);
-int		exp_findexit(char *str);
-int		exp_findentry(char *str);
-
+void	ms_c_error(t_list **head, char *s1, char *s2, int nbr);
 void	ms_free_env(t_list **head, int flag);
 void	ms_exit(t_list **env, t_list **ctt);
 void	ms_exit_here(int fd, char *str);
@@ -76,7 +69,7 @@ void	ms_del_cmd(void *lst);
 void	check_and_insert_spaces(char **line);
 void	ms_input_parser(char *input, t_split *data);
 void	ms_builtin_pwd(t_list **head);
-void	ms_builtin_echo(t_split *data);
+void	ms_builtin_echo(t_list **head, t_split *data);
 void	ms_builtin_export(t_list **head, t_split *data);
 void	ms_builtin_unset(t_list **head, t_split *data);
 void	ms_delentry(void *lst);
@@ -108,6 +101,7 @@ int		init_pipes(t_list **lsthead);
 int		ms_check_and_open(t_split *ptr);
 int		ms_check_and_close(t_split *ptr);
 int		chk_builtin(t_split *data, int len);
+int		ms_print_error(t_list **head, const char *str, int nbr);
 char	*ms_getprompt(t_list *head);
 char	*ms_getenv(t_list *head, char *str);
 char	**ms_split(char	*str);

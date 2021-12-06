@@ -6,7 +6,7 @@
 /*   By: dmylonas <dmylonas@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 10:57:00 by graja             #+#    #+#             */
-/*   Updated: 2021/12/05 12:00:27 by dmylonas         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:35:34 by graja            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,12 @@ void	ms_run_prog(t_list **head, t_split *data)
 			pipe_exec(name, head, data);
 	}
 	else
-		ms_c_error_for_glob(data->tokens[0], ": command not found", 127);
+		ms_c_error(head, data->tokens[0], ": command not found", 127);
 	waitpid(pid, &status, 0);
-	if (WIFEXITED(status))
-		g_status = WEXITSTATUS(status);
+	if (status && name)
+		ms_print_error(head, NULL, errno);
+	else if (name)
+		ms_print_error(head, NULL, 0);
 	close_one_pipe(data);
 	free(name);
 }
