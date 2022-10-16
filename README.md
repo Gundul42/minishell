@@ -4,7 +4,7 @@ Minishell - 42 project to write your own shell mimicking bash<br>
 this is a 42 project to understand how a shell is working,<br>
 including executing commands, builtins and the environment<br>
 <br>
-*to compile on ubuntu linux you will need to run:* 
+*to compile on ubuntu linux you will need to run:*<br>
 <code>sudo apt update && apt install -y gcc make build-essential libbsd-dev libreadline-dev</code>
 
 
